@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scolarisation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <style>
+    .center{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .msg{
+
+      padding: 10px;
+      margin: 10px;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="all">
+<ion-app>
+
+
+
+  <ion-tabs>
+
+
+
+    <ion-tab tab="main">
+      <ion-header translucent>
+        <ion-toolbar color="primary">
+          <div align="center">
+            <ion-title><img src="icon.png" width="50px" /> </ion-title>
+          </div>
+          
+        </ion-toolbar>
+      </ion-header>
+      <ion-content fullscreen class="ion-padding">
+        <div id="main">
+          <h2 style="font-weight: bold;">Mousser</h2>
+        </div>
+      </ion-content>
+    </ion-tab>
+    
+    
+
+    <ion-tab tab="new">
+      <ion-header translucent>
+        <ion-toolbar color="primary">
+          <ion-title>New message</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <ion-item >
+          <ion-label position="floating">Message</ion-label>
+          <ion-input id="msg"></ion-input>
+          <ion-button id="btn" slot="end" style="transform: translateY(50%);"><ion-icon name="send-sharp"></ion-icon></ion-button>
+        </ion-item>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab-bar slot="bottom" color="primary">
+      <ion-tab-button tab="main">
+        <ion-label>Messages</ion-label>
+        <ion-icon name="mail-open-sharp"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="new">
+        <ion-label>New message</ion-label>
+        <ion-icon name="duplicate-sharp"></ion-icon>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tab-bar>
+  </ion-tabs>
+
+
+
+
+
+
+  
+
+  </ion-content>
+</ion-app>
+</div>
+
+<div id="namereg" class="center" style="width: 100%;">
+  <ion-item color="danger">
+    <ion-icon name="alert-sharp"></ion-icon>You can't change your name after this!
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">Name</ion-label>
+    <ion-input id="name" style="width: 100%;"></ion-input>
+  </ion-item>
+  <div align='center'>
+    <ion-button id="reg">Register</ion-button>
+    <ion-button fill="outline" onclick="window.location.reload()"><ion-icon name="refresh-sharp"></ion-icon></ion-button>
+  </div>
+</div>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"
+import { getFirestore , collection, addDoc , getDocs , getDoc , doc, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"
+
+document.getElementById("reg").addEventListener("click",function(){
+
+
+  
+  localStorage.setItem("name",document.getElementById("name").value);
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+})
+
+
+
+const firebaseApp = initializeApp({
+      apiKey: "AIzaSyBRcDPylrV5_EvGoFlFpgTQtWHr4bE-0yI",
+      authDomain: "scolarisation-541b6.firebaseapp.com",
+      projectId: "scolarisation-541b6",
+      storageBucket: "scolarisation-541b6.appspot.com",
+      messagingSenderId: "446538912300",
+      appId: "1:446538912300:web:155b3f6a4ebeaf1e38f789",
+      measurementId: "G-ER20QVCCG2"
+});
+
+
+const db = getFirestore();
+
+document.getElementById("btn").addEventListener("click" , async function(){
+  var UserName = localStorage.getItem("name");
+  var msg = document.getElementById("msg").value;
+  try {
+  const docRef = await addDoc(collection(db, "users" ), {
+    message: `<strong style="color : rgb(1, 120, 255)">${UserName}</strong> <br><br>${msg}`
+  });
+
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    var name = localStorage.getItem("name");
+    console.log(doc.data().message);
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    <br>
+    `
+    window.location.reload();
+  });
+
+})
+
+
+
+
+window.addEventListener("load" , async function(){
+
+
+  const name = localStorage.getItem('name');
+
+if(name){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+}else{
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+  
+
+
+
+
+
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    <br>
+    `
+
+  });
+})
+
+document.getElementById("userchange").addEventListener("click" , function(){
+
+  localStorage.setItem("alert","1")
+
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+})
+
+  </script>
+
+
+</body>
+
+</html>
