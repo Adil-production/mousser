@@ -26,6 +26,7 @@
       color: black;
     }
   </style>
+
 </head>
 
 <body>
@@ -39,24 +40,106 @@
 
 
     <ion-tab tab="main">
-      <ion-header translucent>
-        <ion-toolbar color="primary">
 
-          <ion-buttons slot="end">
-            <ion-button onclick="window.location.reload()">
-          <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <ion-img src="icon.png" style=" width:50px;" slot="start"></ion-img>
-          
-          
-        </ion-toolbar>
-      </ion-header>
-      <ion-content fullscreen class="ion-padding">
-        <div id="main">
 
-        </div>
-      </ion-content>
+
+      <ion-menu side="start" content-id="main-content">
+        <ion-header>
+          <ion-toolbar translucent>
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <form action="index.html" id="form">
+              <ion-item onclick="submitForm()">
+                <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
+                <ion-label>General</ion-label>
+              </ion-item>
+            </form>
+            <script>
+              function submitForm(){
+                  var form = document.getElementById("form");
+                  form.submit();
+              }
+              </script>
+              <form action="sport.html" id="form1">
+                <ion-item onclick="submitForm1()">
+                  <ion-icon name="barbell-sharp" slot="start"></ion-icon>
+                  <ion-label>Sport</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm1(){
+                  var form = document.getElementById("form1");
+                  form.submit();
+              }
+              </script>
+              <form action="tech.html" id="form2">
+                <ion-item onclick="submitForm2()">
+                  <ion-icon name="code-working-sharp" slot="start"></ion-icon>
+                  <ion-label>Tech</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm2(){
+                  var form = document.getElementById("form2");
+                  form.submit();
+              }
+              </script>   
+              <form action="food.html" id="form3">
+                <ion-item onclick="submitForm3()">
+                  <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
+                  <ion-label>Food</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm3(){
+                  var form = document.getElementById("form3");
+                  form.submit();
+              }
+              </script>                           
+              <form action="events.html" id="form4">
+                <ion-item onclick="submitForm4()">
+                  <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
+                  <ion-label>Events</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm4(){
+                  var form = document.getElementById("form4");
+                  form.submit();
+              }
+              </script>                   
+
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  
+      <div class="ion-page" id="main-content">
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button onclick="window.location.reload()">
+              <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-img src="icon.png" style=" width:50px;" slot="start"></ion-img>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h2 style="margin-bottom: 20px;"><strong>General</strong></h2>
+          <div id="main" style="margin: 10px;">
+            
+          </div>
+        </ion-content>
+      </div>
+
+
+
     </ion-tab>
     
     
@@ -210,12 +293,6 @@ if(last){
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
 }
-  
-
-
-
-
-
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
     document.getElementById("main").innerHTML += ` 
@@ -227,8 +304,6 @@ if(last){
 
   });
 })
-
-
 
   </script>
 
