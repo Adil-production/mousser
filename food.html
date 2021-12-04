@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scolarisation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+<meta name="theme-color" content="#4285f4">
+<meta name="msapplication-navbutton-color" content="#4285f4">
+<meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+  <style>
+    .center{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .msg{
+      
+      width: 110%;
+      padding: 20px;
+      margin: -16px;
+      color: black;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="all">
+<ion-app>
+
+
+
+  <ion-tabs>
+
+
+
+    <ion-tab tab="main">
+
+
+
+      <ion-menu side="start" content-id="main-content">
+        <ion-header>
+          <ion-toolbar translucent>
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <form action="index.html" id="form">
+              <ion-item onclick="submitForm()">
+                <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
+                <ion-label>General</ion-label>
+              </ion-item>
+            </form>
+            <script>
+              function submitForm(){
+                  var form = document.getElementById("form");
+                  form.submit();
+              }
+              </script>
+              <form action="sport.html" id="form1">
+                <ion-item onclick="submitForm1()">
+                  <ion-icon name="barbell-sharp" slot="start"></ion-icon>
+                  <ion-label>Sport</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm1(){
+                  var form = document.getElementById("form1");
+                  form.submit();
+              }
+              </script>
+              <form action="tech.html" id="form2">
+                <ion-item onclick="submitForm2()">
+                  <ion-icon name="code-working-sharp" slot="start"></ion-icon>
+                  <ion-label>Tech</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm2(){
+                  var form = document.getElementById("form2");
+                  form.submit();
+              }
+              </script>   
+              <form action="food.html" id="form3">
+                <ion-item onclick="submitForm3()">
+                  <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
+                  <ion-label>Food</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm3(){
+                  var form = document.getElementById("form3");
+                  form.submit();
+              }
+              </script>                           
+              <form action="events.html" id="form4">
+                <ion-item onclick="submitForm4()">
+                  <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
+                  <ion-label>Events</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm4(){
+                  var form = document.getElementById("form4");
+                  form.submit();
+              }
+              </script>                   
+
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  
+      <div class="ion-page" id="main-content">
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button onclick="window.location.reload()">
+              <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-img src="icon.png" style=" width:50px;" slot="start"></ion-img>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h2 style="margin-bottom: 20px;"><strong>Food</strong></h2>
+          <div id="main" style="margin: 10px;">
+            
+          </div>
+        </ion-content>
+      </div>
+
+
+
+    </ion-tab>
+    
+    
+
+    <ion-tab tab="new">
+      <ion-header translucent>
+        <ion-toolbar color="primary">
+          <ion-title>New message</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <ion-item >
+          <ion-label position="floating">Message</ion-label>
+          <ion-input id="msg"></ion-input>
+          <ion-button id="btn" slot="end" style="transform: translateY(50%);"><ion-icon name="send-sharp"></ion-icon></ion-button>
+        </ion-item>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab-bar slot="bottom" color="primary">
+      <ion-tab-button tab="main" onclick="window.location.reload()">
+        <ion-label>Messages</ion-label>
+        <ion-icon name="mail-open-sharp"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="new">
+        <ion-label>New message</ion-label>
+        <ion-icon name="duplicate-sharp"></ion-icon>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tab-bar>
+  </ion-tabs>
+
+
+
+
+
+
+  
+
+  </ion-content>
+</ion-app>
+</div>
+
+<div id="namereg" class="center" style="width: 100%;">
+  <ion-item color="danger">
+    <ion-icon name="alert-sharp"></ion-icon>You can't change this after!
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">First Name</ion-label>
+    <ion-input id="name" style="width: 100%;"></ion-input>
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">Last Name</ion-label>
+    <ion-input id="last" style="width: 100%;"></ion-input>
+  </ion-item>
+  <div align='center'>
+    <ion-button id="reg">Register</ion-button>
+    <ion-button fill="outline" onclick="window.location.reload()"><ion-icon name="refresh-sharp"></ion-icon></ion-button>
+  </div>
+</div>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"
+import { getFirestore , collection, addDoc , getDocs , getDoc , doc, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"
+
+document.getElementById("reg").addEventListener("click",function(){
+  localStorage.setItem("name",document.getElementById("name").value);
+  localStorage.setItem("last",document.getElementById("last").value);
+  if(document.getElementById("name").value == "" || document.getElementById("last").value == ""){
+    alert("sorry some of this inputs are empty")
+  } else {
+    document.getElementById("all").style.display="block";
+    document.getElementById("namereg").style.display="none";
+  }
+
+})
+
+
+
+const firebaseApp = initializeApp({
+      apiKey: "AIzaSyBRcDPylrV5_EvGoFlFpgTQtWHr4bE-0yI",
+      authDomain: "scolarisation-541b6.firebaseapp.com",
+      projectId: "scolarisation-541b6",
+      storageBucket: "scolarisation-541b6.appspot.com",
+      messagingSenderId: "446538912300",
+      appId: "1:446538912300:web:155b3f6a4ebeaf1e38f789",
+      measurementId: "G-ER20QVCCG2"
+});
+
+
+const db = getFirestore();
+
+document.getElementById("btn").addEventListener("click" , async function(){
+  if(document.getElementById("msg").value==""){
+    alert("The message is empty")
+  } else {
+    var UserName = localStorage.getItem("name");
+    var last = localStorage.getItem("last");
+   var msg = document.getElementById("msg").value;
+  try {
+    
+ 
+      const docRef = await addDoc(collection(db, "food" ), {
+    message: `<strong style="color : rgb(1, 120, 255)">${last} ${UserName}</strong> <br><br>${msg}`
+  });
+    
+
+
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+const querySnapshot = await getDocs(collection(db, "food"));
+  querySnapshot.forEach((doc) => {
+    var name = localStorage.getItem("name");
+    console.log(doc.data().message);
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    <br>
+    `
+    window.location.reload();
+  });
+  }
+  
+
+})
+
+
+
+
+window.addEventListener("load" , async function(){
+
+
+  const name = localStorage.getItem('name');
+  const last = localStorage.getItem('last');
+
+if(name){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+} else{
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+if(last){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+} else {
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+  const querySnapshot = await getDocs(collection(db, "food"));
+  querySnapshot.forEach((doc) => {
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    <br>
+    `
+
+  });
+})
+
+  </script>
+
+
+</body>
+
+</html>
