@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+<meta name="theme-color" content="#4285f4">
+<meta name="msapplication-navbutton-color" content="#4285f4">
+<meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
   <style>
     .center{
       position: absolute;
@@ -16,9 +19,10 @@
       transform: translate(-50%,-50%);
     }
     .msg{
-
-      padding: 10px;
-      margin: 10px;
+      
+      width: 110%;
+      padding: 20px;
+      margin: -16px;
       color: black;
     }
   </style>
@@ -37,15 +41,20 @@
     <ion-tab tab="main">
       <ion-header translucent>
         <ion-toolbar color="primary">
-          <div align="center">
-            <ion-title><img src="icon.png" width="50px" /> </ion-title>
-          </div>
+
+          <ion-buttons slot="end">
+            <ion-button onclick="window.location.reload()">
+          <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-img src="icon.png" style=" width:50px;" slot="start"></ion-img>
+          
           
         </ion-toolbar>
       </ion-header>
       <ion-content fullscreen class="ion-padding">
         <div id="main">
-          <h2 style="font-weight: bold;">Mousser</h2>
+
         </div>
       </ion-content>
     </ion-tab>
@@ -69,7 +78,7 @@
     </ion-tab>
 
     <ion-tab-bar slot="bottom" color="primary">
-      <ion-tab-button tab="main">
+      <ion-tab-button tab="main" onclick="window.location.reload()">
         <ion-label>Messages</ion-label>
         <ion-icon name="mail-open-sharp"></ion-icon>
       </ion-tab-button>
@@ -95,11 +104,15 @@
 
 <div id="namereg" class="center" style="width: 100%;">
   <ion-item color="danger">
-    <ion-icon name="alert-sharp"></ion-icon>You can't change your name after this!
+    <ion-icon name="alert-sharp"></ion-icon>You can't change this after!
   </ion-item>
   <ion-item >
-    <ion-label position="floating">Name</ion-label>
+    <ion-label position="floating">First Name</ion-label>
     <ion-input id="name" style="width: 100%;"></ion-input>
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">Last Name</ion-label>
+    <ion-input id="last" style="width: 100%;"></ion-input>
   </ion-item>
   <div align='center'>
     <ion-button id="reg">Register</ion-button>
@@ -112,12 +125,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase
 import { getFirestore , collection, addDoc , getDocs , getDoc , doc, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"
 
 document.getElementById("reg").addEventListener("click",function(){
-
-
-  
   localStorage.setItem("name",document.getElementById("name").value);
-  document.getElementById("all").style.display="block";
-  document.getElementById("namereg").style.display="none";
+  localStorage.setItem("last",document.getElementById("last").value);
+  if(document.getElementById("name").value == "" || document.getElementById("last").value == ""){
+    alert("sorry some of this inputs are empty")
+  } else {
+    document.getElementById("all").style.display="block";
+    document.getElementById("namereg").style.display="none";
+  }
+
 })
 
 
@@ -136,12 +152,20 @@ const firebaseApp = initializeApp({
 const db = getFirestore();
 
 document.getElementById("btn").addEventListener("click" , async function(){
-  var UserName = localStorage.getItem("name");
-  var msg = document.getElementById("msg").value;
+  if(document.getElementById("msg").value==""){
+    alert("The message is empty")
+  } else {
+    var UserName = localStorage.getItem("name");
+    var last = localStorage.getItem("last");
+   var msg = document.getElementById("msg").value;
   try {
-  const docRef = await addDoc(collection(db, "users" ), {
-    message: `<strong style="color : rgb(1, 120, 255)">${UserName}</strong> <br><br>${msg}`
+    
+ 
+      const docRef = await addDoc(collection(db, "users" ), {
+    message: `<strong style="color : rgb(1, 120, 255)">${last} ${UserName}</strong> <br><br>${msg}`
   });
+    
+
 
 } catch (e) {
   console.error("Error adding document: ", e);
@@ -158,6 +182,8 @@ const querySnapshot = await getDocs(collection(db, "users"));
     `
     window.location.reload();
   });
+  }
+  
 
 })
 
@@ -168,11 +194,19 @@ window.addEventListener("load" , async function(){
 
 
   const name = localStorage.getItem('name');
+  const last = localStorage.getItem('last');
 
 if(name){
   document.getElementById("all").style.display="block";
   document.getElementById("namereg").style.display="none";
-}else{
+} else{
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+if(last){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+} else {
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
 }
@@ -194,13 +228,7 @@ if(name){
   });
 })
 
-document.getElementById("userchange").addEventListener("click" , function(){
 
-  localStorage.setItem("alert","1")
-
-  document.getElementById("all").style.display="none";
-  document.getElementById("namereg").style.display="block";
-})
 
   </script>
 
