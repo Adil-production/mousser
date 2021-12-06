@@ -11,7 +11,13 @@
 <meta name="theme-color" content="#4285f4">
 <meta name="msapplication-navbutton-color" content="#4285f4">
 <meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
   <style>
+    *{
+      font-family: 'Poppins', sans-serif;
+    }
     .center{
       position: absolute;
       left: 50%;
@@ -19,12 +25,20 @@
       transform: translate(-50%,-50%);
     }
     .msg{
-      
-      width: 110%;
+      border: solid 0.4px gray;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
       padding: 20px;
-      margin: -16px;
       color: black;
     }
+    #main{
+      position: absolute;
+  left: 0;
+  right: 0;
+    }
+  </style>
   </style>
 
 </head>
@@ -132,7 +146,7 @@
         </ion-header>
         <ion-content class="ion-padding">
           <h2 style="margin-bottom: 20px;"><strong>Events</strong></h2>
-          <div id="main" style="margin: 10px;">
+          <div id="main" >
             
           </div>
         </ion-content>
@@ -245,7 +259,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
     
  
       const docRef = await addDoc(collection(db, "event" ), {
-    message: `<strong style="color : rgb(1, 120, 255)">${last} ${UserName}</strong> <br><br>${msg}`
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}`
   });
     
 
@@ -261,7 +275,6 @@ const querySnapshot = await getDocs(collection(db, "event"));
     <div class="msg">
     ${doc.data().message}
     </div>
-    <br>
     `
     window.location.reload();
   });
@@ -299,7 +312,6 @@ if(last){
     <div class="msg">
     ${doc.data().message}
     </div>
-    <br>
     `
 
   });
