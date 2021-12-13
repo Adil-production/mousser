@@ -4,13 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scolarisation</title>
+  <title>Mousser</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-<meta name="theme-color" content="#4285f4">
-<meta name="msapplication-navbutton-color" content="#4285f4">
-<meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
@@ -131,7 +129,7 @@
   
       <div class="ion-page" id="main-content">
         <ion-header>
-          <ion-toolbar color="primary">
+          <ion-toolbar >
             <ion-buttons slot="start">
               <ion-menu-button></ion-menu-button>
             </ion-buttons>
@@ -140,7 +138,7 @@
               <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
               </ion-button>
             </ion-buttons>
-            <ion-img src="icon.png" style=" width:50px;" slot="start"></ion-img>
+            <ion-img src="icon2.png" style=" width:50px;" slot="start"></ion-img>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
@@ -159,7 +157,7 @@
 
     <ion-tab tab="new">
       <ion-header translucent>
-        <ion-toolbar color="primary">
+        <ion-toolbar >
           <ion-title>New message</ion-title>
         </ion-toolbar>
       </ion-header>
@@ -170,10 +168,20 @@
           <ion-input id="msg"></ion-input>
           <ion-button id="btn" slot="end" style="transform: translateY(50%);"><ion-icon name="send-sharp"></ion-icon></ion-button>
         </ion-item>
+        <ion-item style="display: none;" id="imghref">
+          <ion-label position="floating">Image link</ion-label>
+          <ion-input id="img"></ion-input>
+        </ion-item>
+        <br>
+        <div align="center" id="chip">
+          <ion-chip color="primary" onclick="document.getElementById('imghref').style.display='block';document.getElementById('chip').style.display='none';">
+            Insert image link
+          </ion-chip>
+         </div>
       </ion-content>
     </ion-tab>
 
-    <ion-tab-bar slot="bottom" color="primary">
+    <ion-tab-bar slot="bottom" >
       <ion-tab-button tab="main" onclick="window.location.reload()">
         <ion-label>Messages</ion-label>
         <ion-icon name="mail-open-sharp"></ion-icon>
@@ -254,11 +262,12 @@ document.getElementById("btn").addEventListener("click" , async function(){
     var UserName = localStorage.getItem("name");
     var last = localStorage.getItem("last");
    var msg = document.getElementById("msg").value;
+   var img = document.getElementById("img").value;
   try {
     
  
-      const docRef = await addDoc(collection(db, "food" ), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}`
+      const docRef = await addDoc(collection(db, "users" ), {
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <img src="${img}" style="max-width:100%;" /> `
   });
     
 
