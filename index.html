@@ -271,7 +271,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
     
  
       const docRef = await addDoc(collection(db, "users" ), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <img src="${img}" style="max-width:100%;" /> `
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}<br><br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
   });
     
 
