@@ -180,6 +180,9 @@
             Insert image link
           </ion-chip>
          </div>
+         <div align='center' id="warnchip">
+          <ion-text color="danger" >Sorry, you can't get the image address in mobile, try this in pc</ion-text>
+         </div>
       </ion-content>
     </ion-tab>
 
@@ -298,7 +301,19 @@ const querySnapshot = await getDocs(collection(db, "food"));
 
 window.addEventListener("load" , async function(){
 
+  let details = navigator.userAgent;
+  let regexp = /android|iphone|kindle|ipad/i;
+  let isMobileDevice = regexp.test(details);
 
+  if (isMobileDevice) {
+    //mobile
+      document.getElementById("chip").style.display = "none";
+      document.getElementById("warnchip").style.display = "block";
+  } else {
+    document.getElementById("chip").style.display = "block";
+    document.getElementById("warnchip").style.display = "none";
+
+  }
   const name = localStorage.getItem('name');
   const last = localStorage.getItem('last');
 
