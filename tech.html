@@ -163,10 +163,12 @@
       </ion-header>
 
       <ion-content fullscreen class="ion-padding">
+        <div align="right">
+          <ion-button id="btn" ><ion-icon name="send-sharp"></ion-icon></ion-button>
+         </div>
         <ion-item >
           <ion-label position="floating">Message</ion-label>
           <ion-input id="msg"></ion-input>
-          <ion-button id="btn" slot="end" style="transform: translateY(50%);"><ion-icon name="send-sharp"></ion-icon></ion-button>
         </ion-item>
         <ion-item style="display: none;" id="imghref">
           <ion-label position="floating">Image link</ion-label>
@@ -256,7 +258,7 @@ const firebaseApp = initializeApp({
 const db = getFirestore();
 
 document.getElementById("btn").addEventListener("click" , async function(){
-  if(document.getElementById("msg").value==""){
+  if(document.getElementById("msg").value=="" ){
     alert("The message is empty")
   } else {
     var UserName = localStorage.getItem("name");
@@ -264,10 +266,8 @@ document.getElementById("btn").addEventListener("click" , async function(){
    var msg = document.getElementById("msg").value;
    var img = document.getElementById("img").value;
   try {
-    
- 
-      const docRef = await addDoc(collection(db, "users" ), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <img src="${img}" style="max-width:100%;" /> `
+    const docRef = await addDoc(collection(db, "tech" ), {
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <br><br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
   });
     
 
