@@ -270,7 +270,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
    var img = document.getElementById("img").value;
   try {
     const docRef = await addDoc(collection(db, "tech" ), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <br><br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
   });
     
 
