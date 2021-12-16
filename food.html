@@ -33,8 +33,8 @@
     }
     #main{
       position: absolute;
-  left: 0;
-  right: 0;
+      left: 0;
+      right: 0;
     }
   </style>
 
@@ -142,10 +142,11 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <h2 style="margin-bottom: 20px;"><strong>Food</strong></h2>
+          <h2 style="margin-bottom: 20px;"><strong>General</strong></h2>
           <div id="main">
             
           </div>
+
         </ion-content>
       </div>
 
@@ -282,7 +283,7 @@ const firebaseApp = initializeApp({
 const db = getFirestore();
 
 document.getElementById("btn").addEventListener("click" , async function(){
-  if(document.getElementById("msg").value=="" ){
+  if(document.getElementById("msg").value==""){
     alert("The message is empty")
   } else {
     var UserName = localStorage.getItem("name");
@@ -292,7 +293,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
   try {
     
  
-      const docRef = await addDoc(collection(db, "food" ), {
+      const docRef = await addDoc(collection(db, "users" ), {
     message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
   });
     
@@ -301,7 +302,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
 } catch (e) {
   console.error("Error adding document: ", e);
 }
-const querySnapshot = await getDocs(collection(db, "food"));
+const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
     var name = localStorage.getItem("name");
     console.log(doc.data().message);
@@ -335,6 +336,7 @@ window.addEventListener("load" , async function(){
     document.getElementById("warnchip").style.display = "none";
 
   }
+
   const name = localStorage.getItem('name');
   const last = localStorage.getItem('last');
 
@@ -354,7 +356,7 @@ if(last){
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
 }
-  const querySnapshot = await getDocs(collection(db, "food"));
+  const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
     document.getElementById("main").innerHTML += ` 
     <div class="msg">
@@ -364,11 +366,13 @@ if(last){
 
   });
 })
-document.getElementById("logout").addEventListener("click",function(){
+  
+  document.getElementById("logout").addEventListener("click",function(){
     localStorage.removeItem("last")
     localStorage.removeItem("name")
     window.location.reload()
   })
+
   </script>
 
 
