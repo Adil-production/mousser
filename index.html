@@ -187,6 +187,22 @@
       </ion-content>
     </ion-tab>
 
+    <ion-tab tab="logout">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>Log-out</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div align="center">
+          <h2 id="logName"></h2>
+          <ion-button id="logout">Log-out</ion-button>
+        </div>
+        
+      </ion-content>
+    </ion-tab>
+
     <ion-tab-bar slot="bottom" >
       <ion-tab-button tab="main" onclick="window.location.reload()">
         <ion-label>Messages</ion-label>
@@ -195,6 +211,10 @@
       <ion-tab-button tab="new">
         <ion-label>New message</ion-label>
         <ion-icon name="duplicate-sharp"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="logout">
+        <ion-label>Log-out</ion-label>
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-tab-button>
 
     </ion-tab-bar>
@@ -240,6 +260,7 @@ document.getElementById("reg").addEventListener("click",function(){
   if(document.getElementById("name").value == "" || document.getElementById("last").value == ""){
     alert("sorry some of this inputs are empty")
   } else {
+    document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
     document.getElementById("all").style.display="block";
     document.getElementById("namereg").style.display="none";
   }
@@ -322,6 +343,7 @@ window.addEventListener("load" , async function(){
 if(name){
   document.getElementById("all").style.display="block";
   document.getElementById("namereg").style.display="none";
+  document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
 } else{
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
@@ -329,6 +351,7 @@ if(name){
 if(last){
   document.getElementById("all").style.display="block";
   document.getElementById("namereg").style.display="none";
+  document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
 } else {
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
@@ -343,6 +366,12 @@ if(last){
 
   });
 })
+  
+  document.getElementById("logout").addEventListener("click",function(){
+    localStorage.removeItem("last")
+    localStorage.removeItem("name")
+    window.location.reload()
+  })
 
   </script>
 
