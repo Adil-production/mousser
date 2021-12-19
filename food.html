@@ -35,7 +35,7 @@
       padding: 20px;
       color: black;
     }
-    #main{
+    #main,#your-messages{
       position: absolute;
   left: 0;
   right: 0;
@@ -206,19 +206,35 @@
       </ion-content>
     </ion-tab>
 
+    <ion-tab tab="your">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>Your messages in this device</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div id="your-messages">
+
+        </div>
+      </ion-content>
+    </ion-tab>
+
+
     <ion-tab-bar slot="bottom" >
       <ion-tab-button tab="main" onclick="window.location.reload()">
-        <ion-label>Messages</ion-label>
-        <ion-icon name="mail-open-sharp"></ion-icon>
+        <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="new">
-        <ion-label>New message</ion-label>
         <ion-icon name="duplicate-sharp"></ion-icon>
       </ion-tab-button>
+      <ion-tab-button tab="your">
+        <ion-icon name="mail-open-sharp"></ion-icon>
+      </ion-tab-button>
       <ion-tab-button tab="logout">
-        <ion-label>Log-out</ion-label>
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-tab-button>
+    </ion-tab-bar>
 
     </ion-tab-bar>
   </ion-tab-bar>
@@ -293,6 +309,14 @@ document.getElementById("btn").addEventListener("click" , async function(){
     var last = localStorage.getItem("last");
    var msg = document.getElementById("msg").value;
    var img = document.getElementById("img").value;
+   var message = localStorage.getItem("messagefood");
+   if(message){
+      localStorage.setItem("messagefood" , localStorage.getItem("messagefood") + `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+      document.getElementById("your-messages").innerHTML = localStorage.getItem("messagefood")
+    } else {
+       localStorage.setItem("messagefood" , `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+       document.getElementById("your-messages").innerHTML = localStorage.getItem("messagefood")
+    }
   try {
     
  
@@ -325,7 +349,7 @@ const querySnapshot = await getDocs(collection(db, "food"));
 
 
 window.addEventListener("load" , async function(){
-
+  document.getElementById("your-messages").innerHTML = localStorage.getItem("messagefood")
   let details = navigator.userAgent;
   let regexp = /android|iphone|kindle|ipad/i;
   let isMobileDevice = regexp.test(details);
