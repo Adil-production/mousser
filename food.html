@@ -221,6 +221,28 @@
     </ion-tab>
 
 
+    <ion-tab tab="share">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>Share</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div align="center">
+            <h2>Share :</h2>
+          <br>
+          <a href="whatsapp://send?text=https://adil-production.github.io/mousser" data-action="share/whatsapp/share"><ion-button color="success"><ion-icon name="logo-whatsapp"></ion-icon></ion-button></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-facebook"></ion-icon></ion-button></a>
+          <a href="https://twitter.com/share?url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-twitter"></ion-icon></a>
+          <a href="https://plus.google.com/share?url=https://adil-production.github.io/mousser"><ion-button color="danger"><ion-icon name="logo-google"></ion-icon></a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+        </ion-content>
+    </ion-tab>
+    
+    
+
     <ion-tab-bar slot="bottom" >
       <ion-tab-button tab="main" onclick="window.location.reload()">
         <ion-icon name="chatbubbles-outline"></ion-icon>
@@ -231,10 +253,14 @@
       <ion-tab-button tab="your">
         <ion-icon name="mail-open-sharp"></ion-icon>
       </ion-tab-button>
+      <ion-tab-button tab="share">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-tab-button>
       <ion-tab-button tab="logout">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-tab-button>
     </ion-tab-bar>
+  </ion-tabs>
 
     </ion-tab-bar>
   </ion-tab-bar>
