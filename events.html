@@ -40,6 +40,12 @@
   left: 0;
   right: 0;
     }
+    .add{
+      padding: 5px;
+      border-radius: 100%;
+      border: 2px solid ;
+      width: 50px;
+    }
   </style>
   </style>
 
@@ -248,11 +254,11 @@
       <ion-tab-button tab="main" onclick="window.location.reload()">
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="new">
-        <ion-icon name="duplicate-sharp"></ion-icon>
-      </ion-tab-button>
       <ion-tab-button tab="your">
         <ion-icon name="mail-open-sharp"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="new">
+        <div class="add"><ion-icon name="add-outline" style="font-size: 30px;transform: translateY(5%);"></ion-icon></div>
       </ion-tab-button>
       <ion-tab-button tab="share">
         <ion-icon name="share-social-outline"></ion-icon>
@@ -261,6 +267,7 @@
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-tab-button>
     </ion-tab-bar>
+
   </ion-tabs>
 
     </ion-tab-bar>
