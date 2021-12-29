@@ -47,21 +47,34 @@
     img,ion-img{
       pointer-events: none;
     }
-    *{
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none; 
-    -khtml-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    user-select: none;
+    #chip1{
+      color: rgb(0, 102, 255);
+      background-color: rgb(216, 229, 236);
+      padding: 8px;
+      width: 128px;
+      border-radius: 50px;
+    }
+    
+    @media only screen and (min-width: 1000px) {
+      #main{
+        max-width: 37%;
+        margin: auto;
+        border-right: 1px solid gray;
+        border-left: 1px solid gray;
+        top: 100px;
+      }
+      #type{
+        position: absolute;
+        right: 50%;
+      }
     }
   </style>
 
 </head>
 
 <body>
-  <div id="all">
-<ion-app>
+  
+<ion-app id="all">
 
 
 
@@ -161,10 +174,8 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <h2 style="margin-bottom: 20px;"><strong>Tech</strong></h2>
-          <div id="main" >
-            
-          </div>
+          <h2 style="margin-bottom: 20px;" id="type"><strong>Tech</strong></h2>
+          <div id="main" ></div>
         </ion-content>
       </div>
 
@@ -224,14 +235,18 @@
     <ion-tab tab="your">
       <ion-header translucent>
         <ion-toolbar >
-          <ion-title>Your messages in this device</ion-title>
+          <ion-title>Your Profil</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <ion-content fullscreen class="ion-padding">
-        <div id="your-messages">
-
+        <div align="center">
+          <h1 id="fullname"></h1>
         </div>
+        <br>
+        <div id="chip1">Your messages</div>
+        <br>
+        <div id="your-messages"></div>
       </ion-content>
     </ion-tab>
 
@@ -263,7 +278,7 @@
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="your">
-        <ion-icon name="mail-open-sharp"></ion-icon>
+        <ion-icon name="person-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="new">
         <div class="add"><ion-icon name="add-outline" style="font-size: 30px;transform: translateY(5%);"></ion-icon></div>
@@ -271,7 +286,7 @@
       <ion-tab-button tab="share">
         <ion-icon name="share-social-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="logout">
+      <ion-tab-button tab="logout" id="btn-logout">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-tab-button>
     </ion-tab-bar>
@@ -291,7 +306,7 @@
 
   </ion-content>
 </ion-app>
-</div>
+
 
 <div id="namereg" class="center" style="width: 100%;">
   <ion-item color="danger">
@@ -410,6 +425,7 @@ if(name){
   document.getElementById("all").style.display="block";
   document.getElementById("namereg").style.display="none";
   document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+  document.getElementById("fullname").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
 } else{
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
@@ -418,6 +434,7 @@ if(last){
   document.getElementById("all").style.display="block";
   document.getElementById("namereg").style.display="none";
   document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+  document.getElementById("fullname").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
 } else {
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
@@ -437,6 +454,7 @@ document.getElementById("logout").addEventListener("click",function(){
     localStorage.removeItem("name")
     window.location.reload()
   })
+    
   </script>
 
 
