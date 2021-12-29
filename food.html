@@ -47,13 +47,26 @@
     img,ion-img{
       pointer-events: none;
     }
-    *{
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none; 
-    -khtml-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    user-select: none;
+    #chip1{
+      color: rgb(0, 102, 255);
+      background-color: rgb(216, 229, 236);
+      padding: 8px;
+      width: 128px;
+      border-radius: 50px;
+    }
+    
+    @media only screen and (min-width: 1000px) {
+      #main{
+        max-width: 37%;
+        margin: auto;
+        border-right: 1px solid gray;
+        border-left: 1px solid gray;
+        top: 100px;
+      }
+      #type{
+        position: absolute;
+        right: 50%;
+      }
     }
   </style>
 
@@ -161,7 +174,7 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <h2 style="margin-bottom: 20px;"><strong>Food</strong></h2>
+          <h2 style="margin-bottom: 20px;" id="type"><strong>Food</strong></h2>
           <div id="main">
             
           </div>
@@ -224,14 +237,18 @@
     <ion-tab tab="your">
       <ion-header translucent>
         <ion-toolbar >
-          <ion-title>Your messages in this device</ion-title>
+          <ion-title>Your Profil</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <ion-content fullscreen class="ion-padding">
-        <div id="your-messages">
-
+        <div align="center">
+          <h1 id="fullname"></h1>
         </div>
+        <br>
+        <div id="chip1">Your messages</div>
+        <br>
+        <div id="your-messages"></div>
       </ion-content>
     </ion-tab>
 
