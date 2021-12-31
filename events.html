@@ -61,6 +61,7 @@
         margin: auto;
         border-right: 1px solid gray;
         border-left: 1px solid gray;
+        border-bottom: 1px solid gray;
         top: 100px;
       }
       #type{
@@ -348,15 +349,18 @@ document.getElementById("reg").addEventListener("click",function(){
 
 
 
-const firebaseApp = initializeApp({
-      apiKey: "AIzaSyBRcDPylrV5_EvGoFlFpgTQtWHr4bE-0yI",
-      authDomain: "scolarisation-541b6.firebaseapp.com",
-      projectId: "scolarisation-541b6",
-      storageBucket: "scolarisation-541b6.appspot.com",
-      messagingSenderId: "446538912300",
-      appId: "1:446538912300:web:155b3f6a4ebeaf1e38f789",
-      measurementId: "G-ER20QVCCG2"
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyDjAdg2vgwGgZXI154QNpzMHGrYp9V-W50",
+  authDomain: "tasshilat-5064c.firebaseapp.com",
+  projectId: "tasshilat-5064c",
+  storageBucket: "tasshilat-5064c.appspot.com",
+  messagingSenderId: "58614738497",
+  appId: "1:58614738497:web:ba2d55ca955314c61be0c0",
+  measurementId: "G-8PFTPS64MW"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 const db = getFirestore();
