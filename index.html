@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1139675129391978"
-  crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla&family=Noto+Sans&family=Poppins:wght@300;400&family=Work+Sans&display=swap" rel="stylesheet">
@@ -61,6 +59,7 @@
         margin: auto;
         border-right: 1px solid gray;
         border-left: 1px solid gray;
+        border-bottom: 1px solid gray;
         top: 100px;
       }
       #type{
@@ -246,7 +245,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content fullscreen class="ion-padding">
+      <ion-content  class="ion-padding">
         <div align="center">
           <h1 id="fullname"></h1>
         </div>
@@ -347,15 +346,18 @@ document.getElementById("reg").addEventListener("click",function(){
 
 
 
-const firebaseApp = initializeApp({
-      apiKey: "AIzaSyBRcDPylrV5_EvGoFlFpgTQtWHr4bE-0yI",
-      authDomain: "scolarisation-541b6.firebaseapp.com",
-      projectId: "scolarisation-541b6",
-      storageBucket: "scolarisation-541b6.appspot.com",
-      messagingSenderId: "446538912300",
-      appId: "1:446538912300:web:155b3f6a4ebeaf1e38f789",
-      measurementId: "G-ER20QVCCG2"
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyDjAdg2vgwGgZXI154QNpzMHGrYp9V-W50",
+  authDomain: "tasshilat-5064c.firebaseapp.com",
+  projectId: "tasshilat-5064c",
+  storageBucket: "tasshilat-5064c.appspot.com",
+  messagingSenderId: "58614738497",
+  appId: "1:58614738497:web:ba2d55ca955314c61be0c0",
+  measurementId: "G-8PFTPS64MW"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 const db = getFirestore();
@@ -377,16 +379,14 @@ document.getElementById("btn").addEventListener("click" , async function(){
        document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
     }
    try {
-    const docRef = await addDoc(collection(db, "users" ), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /> `
+    const docRef = await addDoc(collection(db, "general"), {
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />`
   });
-    
-
 
 } catch (e) {
   console.error("Error adding document: ", e);
 }
-const querySnapshot = await getDocs(collection(db, "users"));
+const querySnapshot = await getDocs(collection(db, "general"));
   querySnapshot.forEach((doc) => {
     var name = localStorage.getItem("name");
     console.log(doc.data().message);
@@ -444,7 +444,7 @@ if(last){
   document.getElementById("all").style.display="none";
   document.getElementById("namereg").style.display="block";
 }
-  const querySnapshot = await getDocs(collection(db, "users"));
+  const querySnapshot = await getDocs(collection(db, "general"));
   querySnapshot.forEach((doc) => {
     document.getElementById("main").innerHTML += ` 
     <div class="msg">
