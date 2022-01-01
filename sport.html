@@ -13,174 +13,258 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-  <style>
+<style>
 
-    .center{
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
+  .center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  img{
+    border-radius: 10px;
+  }
+  .msg{
+    border: solid 0.4px gray;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    width: 100%;
+    padding: 20px;
+    color: black;
+  }
+  #main,#your-messages{
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  .add{
+    padding: 6px;
+    border-radius: 100%;
+    border: 2px solid ;
+    width: 50px;
+  }
+  img,ion-img{
+    pointer-events: none;
+  }
+  #chip1{
+    color: rgb(0, 102, 255);
+    background-color: rgb(216, 229, 236);
+    padding: 8px;
+    width: 128px;
+    border-radius: 50px;
+  }
+  #list{
+    display: none;
+  }
+  .list{
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    width: 200%;
+    color: rgb(43, 43, 43);
+    border-radius: 50px;
+    display: inline-block;
+  }
+  .list:hover{
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    width: 200%;
+    background-color: rgb(226, 226, 226);
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  #menu{
+      display: block;
     }
-    img{
-      border-radius: 10px;
+  @media only screen and (min-width: 1000px) {
+    #main{
+      max-width: 37%;
+      margin: auto;
+      border: 1px solid gray;
+      top: 20px;
+      min-height: 100%;
+      box-shadow: 0px 10px 15px -5px gray;
     }
-    .msg{
-      border: solid 0.4px gray;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-      width: 100%;
-      padding: 20px;
-      color: black;
+    #type{
+      position: fixed;
     }
-#main,#your-messages{
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-.add{
-      padding: 6px;
-      border-radius: 100%;
-      border: 2px solid ;
-      width: 50px;
+    #list{
+      display: block;
     }
-    img,ion-img{
-      pointer-events: none;
+    #menu{
+      display: none;
     }
-    #chip1{
-      color: rgb(0, 102, 255);
-      background-color: rgb(216, 229, 236);
-      padding: 8px;
-      width: 128px;
-      border-radius: 50px;
-    }
-    
-    @media only screen and (min-width: 1000px) {
-      #main{
-        max-width: 37%;
-        margin: auto;
-        border-right: 1px solid gray;
-        border-left: 1px solid gray;
-        border-bottom: 1px solid gray;
-        position: absolute;
-        top: 100px;
-      }
-      #type{
-        position: absolute;
-        right: 50%;
-      }
-    }
-  </style>
+  }
+</style>
 
 </head>
 
-<body>
-  <div id="all">
+<body class="dark">
+<div id="all">
 <ion-app>
 
 
 
-  <ion-tabs>
+<ion-tabs>
 
 
 
-    <ion-tab tab="main">
+  <ion-tab tab="main">
 
 
 
-      <ion-menu side="start" content-id="main-content">
-        <ion-header>
-          <ion-toolbar translucent>
-            <ion-title>Menu</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <ion-list>
-            <form action="index.html" id="form">
-              <ion-item onclick="submitForm()">
-                <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
-                <ion-label>General</ion-label>
+    <ion-menu side="start" content-id="main-content">
+      <ion-header>
+        <ion-toolbar translucent>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <form action="index.html" id="form">
+            <ion-item onclick="submitForm()">
+              <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
+              <ion-label>General</ion-label>
+            </ion-item>
+          </form>
+          <script>
+            function submitForm(){
+                var form = document.getElementById("form");
+                form.submit();
+            }
+            </script>
+            <form action="sport.html" id="form1">
+              <ion-item onclick="submitForm1()">
+                <ion-icon name="barbell-sharp" slot="start"></ion-icon>
+                <ion-label>Sport</ion-label>
               </ion-item>
             </form>
-            <script>
-              function submitForm(){
-                  var form = document.getElementById("form");
-                  form.submit();
-              }
-              </script>
-              <form action="sport.html" id="form1">
-                <ion-item onclick="submitForm1()">
-                  <ion-icon name="barbell-sharp" slot="start"></ion-icon>
-                  <ion-label>Sport</ion-label>
-                </ion-item>
-              </form>
-            <script>
-              function submitForm1(){
-                  var form = document.getElementById("form1");
-                  form.submit();
-              }
-              </script>
-              <form action="tech.html" id="form2">
-                <ion-item onclick="submitForm2()">
-                  <ion-icon name="code-working-sharp" slot="start"></ion-icon>
-                  <ion-label>Tech</ion-label>
-                </ion-item>
-              </form>
-            <script>
-              function submitForm2(){
-                  var form = document.getElementById("form2");
-                  form.submit();
-              }
-              </script>   
-              <form action="food.html" id="form3">
-                <ion-item onclick="submitForm3()">
-                  <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
-                  <ion-label>Food</ion-label>
-                </ion-item>
-              </form>
-            <script>
-              function submitForm3(){
-                  var form = document.getElementById("form3");
-                  form.submit();
-              }
-              </script>                           
-              <form action="events.html" id="form4">
-                <ion-item onclick="submitForm4()">
-                  <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
-                  <ion-label>Events</ion-label>
-                </ion-item>
-              </form>
-            <script>
-              function submitForm4(){
-                  var form = document.getElementById("form4");
-                  form.submit();
-              }
-              </script>                   
+          <script>
+            function submitForm1(){
+                var form = document.getElementById("form1");
+                form.submit();
+            }
+            </script>
+            <form action="tech.html" id="form2">
+              <ion-item onclick="submitForm2()">
+                <ion-icon name="code-working-sharp" slot="start"></ion-icon>
+                <ion-label>Tech</ion-label>
+              </ion-item>
+            </form>
+          <script>
+            function submitForm2(){
+                var form = document.getElementById("form2");
+                form.submit();
+            }
+            </script>   
+            <form action="food.html" id="form3">
+              <ion-item onclick="submitForm3()">
+                <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
+                <ion-label>Food</ion-label>
+              </ion-item>
+            </form>
+          <script>
+            function submitForm3(){
+                var form = document.getElementById("form3");
+                form.submit();
+            }
+            </script>                           
+            <form action="events.html" id="form4">
+              <ion-item onclick="submitForm4()">
+                <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
+                <ion-label>Events</ion-label>
+              </ion-item>
+            </form>
+          <script>
+            function submitForm4(){
+                var form = document.getElementById("form4");
+                form.submit();
+            }
+            </script>                   
 
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-  
-      <div class="ion-page" id="main-content">
-        <ion-header>
-          <ion-toolbar >
-            <ion-buttons slot="start">
-              <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-            <ion-buttons slot="end">
-              <ion-button onclick="window.location.reload()">
-              <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <ion-img src="title.png" style=" width:80px;" slot="start"></ion-img>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <h2 style="margin-bottom: 20px;" id="type"><strong>Sport</strong></h2>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar >
+          <ion-buttons slot="start" id="menu">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button onclick="window.location.reload()">
+            <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-img src="title.png" style=" width:80px; margin-left: 20px;" slot="start"></ion-img>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div id="main2">
+          <h2 style="margin-bottom: 20px;" id="type">
+            <strong>Sport</strong>
+            
+            <div id="list" align="center">
+              <br>
+            <br>
+              <form action="index.html" id="form5">
+                
+                <div class="list"  onclick="submitForm5()"><ion-icon name="information-circle-sharp" style="transform: translateY(12%)translateX(-50%); "></ion-icon>General</div>
+                <script>
+                  function submitForm5(){
+                      var form = document.getElementById("form5");
+                      form.submit();
+                  }
+                  </script>
+              </form>
+              <form action="sport.html" id="form6">
+                <div class="list" onclick="submitForm6()"><strong><ion-icon name="barbell-sharp" style="transform: translateY(12%)translateX(-115%); "></ion-icon>Sport</strong></div>
+                <script>
+                  function submitForm6(){
+                      var form = document.getElementById("form6");
+                      form.submit();
+                  }
+                  </script>
+              </form>
+              <form action="tech.html" id="form7">
+                <div class="list" onclick="submitForm7()"><ion-icon name="code-working-sharp" style="transform: translateY(12%)translateX(-125%); "></ion-icon>Tech</div>
+                <script>
+                  function submitForm7(){
+                      var form = document.getElementById("form7");
+                      form.submit();
+                  }
+                  </script>
+              </form>
+              <form action="food.html" id="form8">
+                <div class="list" onclick="submitForm8()"><ion-icon name="fast-food-sharp" style="transform: translateY(12%)translateX(-119%); "></ion-icon>Food</div>
+                <script>
+                  function submitForm8(){
+                      var form = document.getElementById("form8");
+                      form.submit();
+                  }
+                  </script>
+              </form>
+              <form action="events.html" id="form9">
+                <div class="list" onclick="submitForm9()"><ion-icon name="calendar-number-sharp" style="transform: translateY(12%)translateX(-75%); "></ion-icon>Events</div>
+                <script>
+                  function submitForm9(){
+                      var form = document.getElementById("form9");
+                      form.submit();
+                  }
+                  </script>
+              </form>
+            </div>
+          </h2>
+          <br>
+          
           <div id="main">
             
           </div>
-        </ion-content>
+      </div>
+      </ion-content>
       </div>
 
 
@@ -243,7 +327,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content fullscreen class="ion-padding">
+      <ion-content  class="ion-padding">
         <div align="center">
           <h1 id="fullname"></h1>
         </div>
