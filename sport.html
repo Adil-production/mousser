@@ -75,9 +75,6 @@
     border-radius: 50px;
     cursor: pointer;
   }
-  #menu{
-      display: block;
-    }
   @media only screen and (min-width: 1000px) {
     #main{
       max-width: 37%;
@@ -87,15 +84,20 @@
       min-height: 100%;
       box-shadow: 0px 10px 15px -5px gray;
     }
+    #your-messages{
+      max-width: 37%;
+      margin: auto;
+      border: 1px solid gray;
+      min-height: 100%;
+      box-shadow: 0px 10px 15px -5px gray;
+    }
     #type{
       position: fixed;
     }
     #list{
       display: block;
     }
-    #menu{
-      display: none;
-    }
+    
   }
 </style>
 
@@ -260,9 +262,12 @@
           </h2>
           <br>
           
-          <div id="main">
-            
-          </div>
+          <div id="main"></div>
+            <div id="notmain" style="display: none;"class="center">
+              <ion-icon name="hourglass-sharp" style="font-size: 100px;"></ion-icon>
+              <br>
+              <h2><strong>Nothing !</strong></h2>
+            </div>
       </div>
       </ion-content>
       </div>
@@ -334,7 +339,16 @@
         <br>
         <div id="chip1">Your messages</div>
         <br>
+        <div align="center">
+          <ion-button color="danger" id="delete" onclick="document.getElementById('your-messages').value = '';localStorage.setItem('messagesport','');window.location.reload()">Delete</ion-button>
+        </div>
+        <br>
         <div id="your-messages"></div>
+        <div id="notyour-messages" style="display: none;"align="center">
+          <ion-icon name="hourglass-sharp" style="font-size: 100px;"></ion-icon>
+          <br>
+          <h2><strong>Nothing !</strong></h2>
+        </div>
       </ion-content>
     </ion-tab>
 
@@ -490,7 +504,21 @@ const querySnapshot = await getDocs(collection(db, "sport"));
   });
   }
   
-
+  if(document.getElementById("main").innerHTML == ""){
+    document.getElementById("main").style.display="none";
+    document.getElementById("notmain").style.display="block";
+  } else{
+    document.getElementById("main").style.display="block";
+    document.getElementById("notmain").style.display="none";
+  } if(document.getElementById("your-messages").innerHTML == ""){
+    document.getElementById("your-messages").style.display="none";
+    document.getElementById("notyour-messages").style.display="block";
+    document.getElementById("delete").style.display="none";
+  } else{
+    document.getElementById("your-messages").style.display="block";
+    document.getElementById("notyour-messages").style.display="none";
+    document.getElementById("delete").style.display="block";
+  } 
 })
 
 
@@ -541,6 +569,21 @@ if(last){
     `
 
   });
+  if(document.getElementById("main").innerHTML == ""){
+    document.getElementById("main").style.display="none";
+    document.getElementById("notmain").style.display="block";
+  } else{
+    document.getElementById("main").style.display="block";
+    document.getElementById("notmain").style.display="none";
+  } if(document.getElementById("your-messages").innerHTML == ""){
+    document.getElementById("your-messages").style.display="none";
+    document.getElementById("notyour-messages").style.display="block";
+    document.getElementById("delete").style.display="none";
+  } else{
+    document.getElementById("your-messages").style.display="block";
+    document.getElementById("notyour-messages").style.display="none";
+    document.getElementById("delete").style.display="block";
+  } 
 })
 document.getElementById("logout").addEventListener("click",function(){
     localStorage.removeItem("last")
