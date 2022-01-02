@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mousser</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla&family=Noto+Sans&family=Poppins:wght@300;400&family=Work+Sans&display=swap" rel="stylesheet">
+  <style>
+
+    .center{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    img{
+      border-radius: 10px;
+    }
+    .msg{
+      border: solid 0.4px gray;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
+      padding: 20px;
+      color: black;
+    }
+    #main,#your-messages{
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    .add{
+      padding: 6px;
+      border-radius: 100%;
+      border: 2px solid ;
+      width: 50px;
+    }
+    img,ion-img{
+      pointer-events: none;
+    }
+    #chip1{
+      color: rgb(0, 102, 255);
+      background-color: rgb(216, 229, 236);
+      padding: 8px;
+      width: 128px;
+      border-radius: 50px;
+    }
+    #list{
+      display: none;
+    }
+    .list{
+      padding: 10px;
+      margin: 5px;
+      font-size: 20px;
+      width: 200%;
+      color: rgb(43, 43, 43);
+      border-radius: 50px;
+      display: inline-block;
+    }
+    .list:hover{
+      padding: 10px;
+      margin: 5px;
+      font-size: 20px;
+      width: 200%;
+      background-color: rgb(226, 226, 226);
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    @media only screen and (min-width: 1000px) {
+      #main{
+        max-width: 37%;
+        margin: auto;
+        border: 1px solid gray;
+        top: 20px;
+        min-height: 100%;
+        box-shadow: 0px 10px 15px -5px gray;
+      }
+      #your-messages{
+        max-width: 37%;
+        margin: auto;
+        border: 1px solid gray;
+        min-height: 100%;
+        box-shadow: 0px 10px 15px -5px gray;
+      }
+      #type{
+        position: fixed;
+      }
+      #list{
+        display: block;
+      }
+      
+    }
+  </style>
+
+</head>
+
+<body class="dark">
+  <div id="all" style="display: none;">
+<ion-app>
+
+
+
+  <ion-tabs>
+
+
+
+    <ion-tab tab="main">
+
+
+
+      <ion-menu side="start" content-id="main-content">
+        <ion-header>
+          <ion-toolbar translucent>
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <form action="index.html" id="form">
+              <ion-item onclick="submitForm()">
+                <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
+                <ion-label>General</ion-label>
+              </ion-item>
+            </form>
+            <script>
+              function submitForm(){
+                  var form = document.getElementById("form");
+                  form.submit();
+              }
+              </script>
+              <form action="sport.html" id="form1">
+                <ion-item onclick="submitForm1()">
+                  <ion-icon name="barbell-sharp" slot="start"></ion-icon>
+                  <ion-label>Sport</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm1(){
+                  var form = document.getElementById("form1");
+                  form.submit();
+              }
+              </script>
+              <form action="tech.html" id="form2">
+                <ion-item onclick="submitForm2()">
+                  <ion-icon name="code-working-sharp" slot="start"></ion-icon>
+                  <ion-label>Tech</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm2(){
+                  var form = document.getElementById("form2");
+                  form.submit();
+              }
+              </script>   
+              <form action="food.html" id="form3">
+                <ion-item onclick="submitForm3()">
+                  <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
+                  <ion-label>Food</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm3(){
+                  var form = document.getElementById("form3");
+                  form.submit();
+              }
+              </script>                           
+              <form action="events.html" id="form4">
+                <ion-item onclick="submitForm4()">
+                  <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
+                  <ion-label>Events</ion-label>
+                </ion-item>
+              </form>
+            <script>
+              function submitForm4(){
+                  var form = document.getElementById("form4");
+                  form.submit();
+              }
+              </script>                   
+
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  
+      <div class="ion-page" id="main-content">
+        <ion-header>
+          <ion-toolbar >
+            <ion-buttons slot="start" id="menu">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button onclick="window.location.reload()">
+              <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-img src="title.png" style=" width:80px; margin-left: 20px;" slot="start"></ion-img>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div id="main2">
+            <h2 style="margin-bottom: 20px;" id="type">
+              <strong>General</strong>
+              
+              <div id="list" align="center">
+                <br>
+              <br>
+                <form action="index.html" id="form5">
+                  
+                  <div class="list"  onclick="submitForm5()"><strong><ion-icon name="information-circle-sharp" style="transform: translateY(12%)translateX(-50%); "></ion-icon>General</strong></div>
+                  <script>
+                    function submitForm5(){
+                        var form = document.getElementById("form5");
+                        form.submit();
+                    }
+                    </script>
+                </form>
+                <form action="sport.html" id="form6">
+                  <div class="list" onclick="submitForm6()"><ion-icon name="barbell-sharp" style="transform: translateY(12%)translateX(-115%); "></ion-icon>Sport</div>
+                  <script>
+                    function submitForm6(){
+                        var form = document.getElementById("form6");
+                        form.submit();
+                    }
+                    </script>
+                </form>
+                <form action="tech.html" id="form7">
+                  <div class="list" onclick="submitForm7()"><ion-icon name="code-working-sharp" style="transform: translateY(12%)translateX(-125%); "></ion-icon>Tech</div>
+                  <script>
+                    function submitForm7(){
+                        var form = document.getElementById("form7");
+                        form.submit();
+                    }
+                    </script>
+                </form>
+                <form action="food.html" id="form8">
+                  <div class="list" onclick="submitForm8()"><ion-icon name="fast-food-sharp" style="transform: translateY(12%)translateX(-119%); "></ion-icon>Food</div>
+                  <script>
+                    function submitForm8(){
+                        var form = document.getElementById("form8");
+                        form.submit();
+                    }
+                    </script>
+                </form>
+                <form action="events.html" id="form9">
+                  <div class="list" onclick="submitForm9()"><ion-icon name="calendar-number-sharp" style="transform: translateY(12%)translateX(-75%); "></ion-icon>Events</div>
+                  <script>
+                    function submitForm9(){
+                        var form = document.getElementById("form9");
+                        form.submit();
+                    }
+                    </script>
+                </form>
+              </div>
+            </h2>
+            <br>
+            
+            <div id="main"></div>
+            <div id="notmain" style="display: none;"class="center">
+              <ion-icon name="hourglass-sharp" style="font-size: 100px;"></ion-icon>
+              <br>
+              <h2><strong>Nothing !</strong></h2>
+            </div>
+        </div>
+        </ion-content>
+      </div>
+    </ion-tab>
+    
+    
+
+    <ion-tab tab="new">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>New message</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div align="right">
+          <ion-button id="btn" ><ion-icon name="send-sharp"></ion-icon></ion-button>
+         </div>
+        <ion-item >
+          <ion-label position="floating">Message</ion-label>
+          <ion-input id="msg"></ion-input>
+        </ion-item>
+        <ion-item style="display: none;" id="imghref">
+          <ion-label position="floating">Image link</ion-label>
+          <ion-input id="img"></ion-input>
+        </ion-item>
+        <br>
+        <div align="center" id="chip">
+          <ion-chip color="primary" onclick="document.getElementById('imghref').style.display='block';document.getElementById('chip').style.display='none';">
+            Insert image link
+          </ion-chip>
+         </div>
+         <div align='center' id="warnchip">
+          <ion-text color="danger" >Sorry, you can't get the image address in mobile, try this in pc</ion-text>
+         </div>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab tab="logout">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>Log-out</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div align="center" class="ion-padding">
+          <div align="left">
+            <h2 id="logName"></h2>
+          </div>
+          <br>
+          <ion-button id="logout">Log-out</ion-button>
+        </div>
+        
+      </ion-content>
+    </ion-tab>
+
+
+    <ion-tab tab="your">
+      <ion-header>
+        <ion-toolbar >
+          <ion-title>Your Profil</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content  class="ion-padding">
+        <div align="center">
+          <h1 id="fullname"></h1>
+        </div>
+        <br>
+        <div id="chip1">Your messages</div>
+        <br>
+        <div align="center">
+          <ion-button color="danger" id="delete" onclick="document.getElementById('your-messages').value = '';localStorage.setItem('messagegeneral','');window.location.reload()">Delete</ion-button>
+        </div>
+        <br>
+        <div id="your-messages"></div>
+        <div id="notyour-messages" style="display: none;"align="center">
+          <ion-icon name="hourglass-sharp" style="font-size: 100px;"></ion-icon>
+          <br>
+          <h2><strong>Nothing !</strong></h2>
+        </div>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab tab="share">
+      <ion-header translucent>
+        <ion-toolbar >
+          <ion-title>Share</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen class="ion-padding">
+        <div align="center">
+            <h2>Share :</h2>
+          <br>
+          <a href="whatsapp://send?text=https://adil-production.github.io/mousser" data-action="share/whatsapp/share"><ion-button color="success"><ion-icon name="logo-whatsapp"></ion-icon></ion-button></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-facebook"></ion-icon></ion-button></a>
+          <a href="https://twitter.com/share?url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-twitter"></ion-icon></a>
+          <a href="https://plus.google.com/share?url=https://adil-production.github.io/mousser"><ion-button color="danger"><ion-icon name="logo-google"></ion-icon></a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+        </ion-content>
+    </ion-tab>
+    
+    
+
+    <ion-tab-bar slot="bottom" >
+      <ion-tab-button tab="main" onclick="window.location.reload()">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="your">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="new">
+        <div class="add"><ion-icon name="add-outline" style="font-size: 30px;transform: translateY(5%);"></ion-icon></div>
+      </ion-tab-button>
+      <ion-tab-button tab="share">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="logout">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+    
+  </ion-tabs>
+
+
+
+
+
+
+  
+
+  </ion-content>
+</ion-app>
+</div>
+
+<div id="namereg" class="center" style="width: 100%;">
+  <ion-item color="danger">
+    <ion-icon name="alert-sharp"></ion-icon>You can't change this after!
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">First Name</ion-label>
+    <ion-input id="name" style="width: 100%;"></ion-input>
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">Last Name</ion-label>
+    <ion-input id="last" style="width: 100%;"></ion-input>
+  </ion-item>
+  <div align='center'>
+    <ion-button id="reg">Register</ion-button>
+    <ion-button fill="outline" onclick="window.location.reload()"><ion-icon name="refresh-sharp"></ion-icon></ion-button>
+  </div>
+</div>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"
+import { getFirestore , collection, addDoc , getDocs , getDoc , doc, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"
+
+document.getElementById("reg").addEventListener("click",function(){
+  localStorage.setItem("name",document.getElementById("name").value);
+  localStorage.setItem("last",document.getElementById("last").value);
+  if(document.getElementById("name").value == "" || document.getElementById("last").value == ""){
+    alert("sorry some of this inputs are empty")
+  } else {
+    document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+    document.getElementById("all").style.display="block";
+    document.getElementById("namereg").style.display="none";
+  }
+
+})
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDjAdg2vgwGgZXI154QNpzMHGrYp9V-W50",
+  authDomain: "tasshilat-5064c.firebaseapp.com",
+  projectId: "tasshilat-5064c",
+  storageBucket: "tasshilat-5064c.appspot.com",
+  messagingSenderId: "58614738497",
+  appId: "1:58614738497:web:ba2d55ca955314c61be0c0",
+  measurementId: "G-8PFTPS64MW"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore();
+
+document.getElementById("btn").addEventListener("click" , async function(){
+  if(document.getElementById("msg").value==""){
+    alert("The message is empty")
+  } else {
+    var UserName = localStorage.getItem("name");
+    var last = localStorage.getItem("last");
+   var msg = document.getElementById("msg").value;
+   var img = document.getElementById("img").value;
+   var message = localStorage.getItem("messagegeneral");
+   if(message){
+      localStorage.setItem("messagegeneral" , localStorage.getItem("messagegeneral") + `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+      document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
+    } else {
+       localStorage.setItem("messagegeneral" , `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+       document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
+    }
+   try {
+    const docRef = await addDoc(collection(db, "general"), {
+    message: `<strong style="color : black">${last} ${UserName}</strong><br>${msg}  <br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />`
+  });
+
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+const querySnapshot = await getDocs(collection(db, "general"));
+  querySnapshot.forEach((doc) => {
+    var name = localStorage.getItem("name");
+    console.log(doc.data().message);
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    `
+    window.location.reload();
+  });
+  }
+  if(document.getElementById("main").innerHTML == ""){
+    document.getElementById("main").style.display="none";
+    document.getElementById("notmain").style.display="block";
+  } else{
+    document.getElementById("main").style.display="block";
+    document.getElementById("notmain").style.display="none";
+  } if(document.getElementById("your-messages").innerHTML == ""){
+    document.getElementById("your-messages").style.display="none";
+    document.getElementById("notyour-messages").style.display="block";
+    document.getElementById("delete").style.display="none";
+  } else{
+    document.getElementById("your-messages").style.display="block";
+    document.getElementById("notyour-messages").style.display="none";
+    document.getElementById("delete").style.display="block";
+  } 
+
+})
+
+
+
+
+window.addEventListener("load" , async function(){
+
+  document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
+
+  let details = navigator.userAgent;
+  let regexp = /android|iphone|kindle|ipad/i;
+  let isMobileDevice = regexp.test(details);
+
+  if (isMobileDevice) {
+    //mobile
+      document.getElementById("chip").style.display = "none";
+      document.getElementById("warnchip").style.display = "block";
+  } else {
+    document.getElementById("chip").style.display = "block";
+    document.getElementById("warnchip").style.display = "none";
+
+  }
+
+  const name = localStorage.getItem('name');
+  const last = localStorage.getItem('last');
+
+if(name){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+  document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+  document.getElementById("fullname").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+} else{
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+if(last){
+  document.getElementById("all").style.display="block";
+  document.getElementById("namereg").style.display="none";
+  document.getElementById("logName").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+  document.getElementById("fullname").innerHTML = localStorage.getItem("last") + " " + localStorage.getItem("name");
+} else {
+  document.getElementById("all").style.display="none";
+  document.getElementById("namereg").style.display="block";
+}
+  const querySnapshot = await getDocs(collection(db, "general"));
+  querySnapshot.forEach((doc) => {
+    document.getElementById("main").innerHTML += ` 
+    <div class="msg">
+    ${doc.data().message}
+    </div>
+    `
+  });
+  if(document.getElementById("main").innerHTML == ""){
+    document.getElementById("main").style.display="none";
+    document.getElementById("notmain").style.display="block";
+  } else{
+    document.getElementById("main").style.display="block";
+    document.getElementById("notmain").style.display="none";
+  } if(document.getElementById("your-messages").innerHTML == ""){
+    document.getElementById("your-messages").style.display="none";
+    document.getElementById("notyour-messages").style.display="block";
+    document.getElementById("delete").style.display="none";
+  } else{
+    document.getElementById("your-messages").style.display="block";
+    document.getElementById("notyour-messages").style.display="none";
+    document.getElementById("delete").style.display="block";
+  } 
+})
+  
+  document.getElementById("logout").addEventListener("click",function(){
+    localStorage.removeItem("last")
+    localStorage.removeItem("name")
+    window.location.reload()
+  })
+
+  </script>
+
+
+</body>
+
+</html>
