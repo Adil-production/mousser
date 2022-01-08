@@ -100,7 +100,10 @@
     
   }
 </style>
-
+<script type="module">
+  import { modalController } from 'https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/index.esm.js';
+  window.modalController = modalController;
+</script>
 </head>
 
 <body class="dark">
@@ -285,7 +288,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content fullscreen class="ion-padding">
+      <ion-content  class="ion-padding">
         <div align="right">
           <ion-button id="btn" ><ion-icon name="send-sharp"></ion-icon></ion-button>
          </div>
@@ -306,6 +309,10 @@
          <div align='center' id="warnchip">
           <ion-text color="danger" >Sorry, you can't get the image address in mobile, try this in pc</ion-text>
          </div>
+         <br>
+         <h2><strong>Top news :</strong></h2>
+         <br>
+         <div id="news"></div>
       </ion-content>
     </ion-tab>
 
@@ -317,16 +324,29 @@
       </ion-header>
 
       <ion-content fullscreen class="ion-padding">
+          <div align="center">
+            <h1><strong id="logName"></strong></h1>
+            <br>
+            <ion-button id="logout">Log-out</ion-button>
+          </div>
+        <hr>
         <div align="center">
-          <h2 id="logName"></h2>
-          <ion-button id="logout">Log-out</ion-button>
-        </div>
-        
+          <ion-item>
+            Share :
+          </ion-item>
+        <br>
+        <a href="whatsapp://send?text=https://adil-production.github.io/mousser" data-action="share/whatsapp/share"><ion-button color="success"><ion-icon name="logo-whatsapp"></ion-icon></ion-button></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-facebook"></ion-icon></ion-button></a>
+        <a href="https://twitter.com/share?url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-twitter"></ion-icon></a>
+        <a href="https://plus.google.com/share?url=https://adil-production.github.io/mousser"><ion-button color="danger"><ion-icon name="logo-google"></ion-icon></a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-linkedin"></ion-icon></a>
+      </div>
       </ion-content>
     </ion-tab>
 
+
     <ion-tab tab="your">
-      <ion-header translucent>
+      <ion-header>
         <ion-toolbar >
           <ion-title>Your Profil</ion-title>
         </ion-toolbar>
@@ -334,13 +354,15 @@
 
       <ion-content  class="ion-padding">
         <div align="center">
-          <h1 id="fullname"></h1>
+          <h1><strong id="fullname"></strong></h1>
         </div>
         <br>
-        <div id="chip1">Your messages</div>
+        <ion-item>
+          Your Messages :
+        </ion-item>
         <br>
         <div align="center">
-          <ion-button color="danger" id="delete" onclick="document.getElementById('your-messages').value = '';localStorage.setItem('messagesport','');window.location.reload()">Delete</ion-button>
+          <ion-button color="danger" id="delete" onclick="document.getElementById('your-messages').value = '';localStorage.setItem('messagegeneral','');window.location.reload()">Delete</ion-button>
         </div>
         <br>
         <div id="your-messages"></div>
@@ -353,25 +375,7 @@
     </ion-tab>
 
 
-    <ion-tab tab="share">
-      <ion-header translucent>
-        <ion-toolbar >
-          <ion-title>Share</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content fullscreen class="ion-padding">
-        <div align="center">
-            <h2>Share :</h2>
-          <br>
-          <a href="whatsapp://send?text=https://adil-production.github.io/mousser" data-action="share/whatsapp/share"><ion-button color="success"><ion-icon name="logo-whatsapp"></ion-icon></ion-button></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-facebook"></ion-icon></ion-button></a>
-          <a href="https://twitter.com/share?url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-twitter"></ion-icon></a>
-          <a href="https://plus.google.com/share?url=https://adil-production.github.io/mousser"><ion-button color="danger"><ion-icon name="logo-google"></ion-icon></a>
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://adil-production.github.io/mousser"><ion-button color="primary"><ion-icon name="logo-linkedin"></ion-icon></a>
-        </div>
-        </ion-content>
-    </ion-tab>
+    
     
     
 
@@ -380,13 +384,13 @@
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="your">
-        <ion-icon name="mail-open-sharp"></ion-icon>
+        <ion-icon name="person-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="new">
         <div class="add"><ion-icon name="add-outline" style="font-size: 30px;transform: translateY(5%);"></ion-icon></div>
       </ion-tab-button>
-      <ion-tab-button tab="share">
-        <ion-icon name="share-social-outline"></ion-icon>
+      <ion-tab-button tab="about" onclick="openSheetModal()">
+        <ion-icon name="information-sharp"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="logout">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -591,7 +595,107 @@ document.getElementById("logout").addEventListener("click",function(){
     window.location.reload()
   })
   </script>
+<script>
+  const pageEl = document.querySelector('.ion-page');
+        customElements.define(
+          'modal-content',
+          class ModalContent extends HTMLElement {
+            connectedCallback() {
+              this.innerHTML = `
+            <ion-header translucent>
+              <ion-toolbar>
+                <ion-title>About Mousser</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button onclick="dismissModal()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content fullscreen class="ion-padding">
+              <h3>Mousser  is a social media created by <ion-text color="primary">BELHASS Mohamed Adil</ion-text> or you can say <ion-text color="primary">Porbet</ion-text>. It allows a user to send free text messages in different rooms : General , Sport , Tech , Food and Events</h3>
+            </ion-content>
+          `;
+            }
+          }
+        );
+  
+        let currentModal = null;
+        async function openModal(opts = {}) {
+          const modal = await modalController.create({
+            component: 'modal-content',
+            ...opts,
+          });
+          modal.present();
+  
+          currentModal = modal;
+        }
+  
+        function openSheetModal() {
+          openModal({
+            breakpoints: [0.5],
+            initialBreakpoint: 0.5,
+          });
+        }
+  
+        function openCardModal() {
+          openModal({
+            swipeToClose: true,
+            presentingElement: pageEl,
+          });
+        }
+  
+        function dismissModal() {
+          if (currentModal) {
+            currentModal.dismiss().then(() => {
+              currentModal = null;
+            });
+          }
+        }
+        const API_URL = 'https://newsdata.io/api/1/news?apikey=pub_12256fd4bb513de2c35c5af1589f8aa3938a&language=en'
+const main = document.getElementById('news')
 
+
+// Get initial movies
+getMovies(API_URL)
+
+async function getMovies(url) {
+    const res = await fetch(url)
+    const data = await res.json()
+
+    showMovies(data.results)
+    console.log(data)
+}
+
+function showMovies(movies) {
+    main.innerHTML = ''
+
+    movies.forEach((movie) => {
+        const { title, image_url , pubDate , source_id} = movie
+
+        const movieEl = document.createElement('div')
+        movieEl.classList.add('movie')
+
+        movieEl.innerHTML = `
+        <ion-card>
+        <img src="${image_url}" width="100%"/>
+        <ion-card-header>
+          <ion-card-title>${title}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Source : ${source_id}
+        </ion-card-content>
+       
+            <ion-label style="margin : 10px; padding:10px;">${pubDate}</ion-label>
+            <br>
+            <br>
+
+      </ion-card>
+      <br>
+            
+        `
+        main.appendChild(movieEl)
+    })
+}
+  </script>
 
 </body>
 
