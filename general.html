@@ -126,7 +126,7 @@
         </ion-header>
         <ion-content>
           <ion-list>
-            <form action="index.html" id="form">
+            <form action="general.html" id="form">
               <ion-item onclick="submitForm()">
                 <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
                 <ion-label>General</ion-label>
@@ -203,7 +203,7 @@
               <ion-icon name="refresh-outline" style="font-size : 30px; padding:10px;" ></ion-icon>
               </ion-button>
             </ion-buttons>
-            <ion-img src="title.png" style=" width:80px; margin-left: 20px;" slot="start"></ion-img>
+            <ion-img src="images/title.png" style=" width:80px; margin-left: 20px;" slot="start"></ion-img>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
@@ -214,7 +214,7 @@
               <div id="list" align="center">
                 <br>
               <br>
-                <form action="index.html" id="form5">
+                <form action="general.html" id="form5">
                   
                   <div class="list"  onclick="submitForm5()"><strong><ion-icon name="information-circle-sharp" style="transform: translateY(12%)translateX(-50%); "></ion-icon>General</strong></div>
                   <script>
@@ -297,12 +297,14 @@
         </ion-item>
         <br>
         <div align="center" id="chip">
-          <ion-chip color="primary" onclick="document.getElementById('imghref').style.display='block';document.getElementById('chip').style.display='none';">
-            Insert image link
+          <ion-chip color="primary" onclick="document.getElementById('imghref').style.display='block';document.getElementById('chip2').style.display='block';document.getElementById('chip').style.display='none';">
+            Insert image address
           </ion-chip>
          </div>
-         <div align='center' id="warnchip">
-          <ion-text color="danger" >Sorry, you can't get the image address in mobile, try this in pc</ion-text>
+         <div align="center" style="display: none;" id="chip2">
+          <a href="getImageUrl.html" style="text-decoration: none;"><ion-chip color="primary" >
+            I don't know how to get the image address
+          </ion-chip></a>
          </div>
          <br>
          <h2><strong>Top news :</strong></h2>
@@ -352,18 +354,6 @@
           <h1><strong id="fullname"></strong></h1>
         </div>
         <br>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1139675129391978"
-     crossorigin="anonymous"></script>
-<!-- ad unit -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1139675129391978"
-     data-ad-slot="1452970905"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <ion-item>
           Your Messages :
         </ion-item>
@@ -530,19 +520,6 @@ window.addEventListener("load" , async function(){
 
   document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
 
-  let details = navigator.userAgent;
-  let regexp = /android|iphone|kindle|ipad/i;
-  let isMobileDevice = regexp.test(details);
-
-  if (isMobileDevice) {
-    //mobile
-      document.getElementById("chip").style.display = "none";
-      document.getElementById("warnchip").style.display = "block";
-  } else {
-    document.getElementById("chip").style.display = "block";
-    document.getElementById("warnchip").style.display = "none";
-
-  }
 
   const name = localStorage.getItem('name');
   const last = localStorage.getItem('last');
@@ -653,7 +630,7 @@ const pageEl = document.querySelector('.ion-page');
           });
         }
       }
-const API_URL = 'https://newsdata.io/api/1/news?apikey=pub_12256fd4bb513de2c35c5af1589f8aa3938a&language=en'
+      const API_URL = 'https://newsdata.io/api/1/news?apikey=pub_12256fd4bb513de2c35c5af1589f8aa3938a&language=en'
 const main = document.getElementById('news')
 
 
@@ -698,9 +675,9 @@ function showMovies(movies) {
         main.appendChild(movieEl)
     })
 }
-
-
 </script>
+
+
 </body>
 
 </html>
