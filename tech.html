@@ -14,6 +14,105 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 <style>
+  .pn-ProductNav_Wrapper {
+position: relative;
+padding: 0 11px;
+}
+
+.pn-ProductNav {
+/* Make this scrollable when needed */
+overflow-x: auto;
+/* We don't want vertical scrolling */
+overflow-y: hidden;
+/* For WebKit implementations, provide inertia scrolling */
+-webkit-overflow-scrolling: touch;
+/* We don't want internal inline elements to wrap */
+white-space: nowrap;
+/* If JS present, let's hide the default scrollbar */
+/* positioning context for advancers */
+position: relative;
+}
+.js .pn-ProductNav {
+/* Make an auto-hiding scroller for the 3 people using a IE */
+-ms-overflow-style: -ms-autohiding-scrollbar;
+/* Remove the default scrollbar for WebKit implementations */
+}
+.js .pn-ProductNav::-webkit-scrollbar {
+display: none;
+}
+
+.pn-ProductNav_Contents {
+float: left;
+transition: transform 0.2s ease-in-out;
+}
+
+.pn-ProductNav_Contents-no-transition {
+transition: none;
+}
+
+.pn-ProductNav_Link {
+text-decoration: none;
+color: #888;
+font-size: 1.2em;
+font-family: -apple-system, sans-serif;
+display: inline-flex;
+align-items: center;
+min-height: 44px;
+}
+.pn-ProductNav_Link + .pn-ProductNav_Link {
+margin-left: 11px;
+padding-left: 11px;
+border-left: 1px solid #eee;
+}
+.pn-ProductNav_Link[aria-selected=true] {
+color: #111;
+}
+
+.pn-Advancer {
+/* Reset the button */
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+background: transparent;
+padding: 0;
+border: 0;
+/* Now style it as needed */
+position: absolute;
+top: 0;
+bottom: 0;
+/* Set the buttons invisible by default */
+opacity: 0.2;
+transition: opacity 0.3s;
+}
+.pn-Advancer:focus {
+outline: 0;
+}
+.pn-Advancer:hover {
+cursor: pointer;
+}
+
+.pn-Advancer_Left {
+left: 0;
+}
+[data-overflowing=both] ~ .pn-Advancer_Left, [data-overflowing=left] ~ .pn-Advancer_Left {
+opacity: 1;
+}
+
+.pn-Advancer_Right {
+right: 0;
+}
+[data-overflowing=both] ~ .pn-Advancer_Right, [data-overflowing=right] ~ .pn-Advancer_Right {
+opacity: 1;
+}
+
+.pn-Advancer_Icon {
+width: 20px;
+height: 44px;
+fill: rgb(81, 108, 156);
+}
+
+</style>
+<style>
 
   .center{
     position: absolute;
@@ -120,78 +219,7 @@
 
 
 
-    <ion-menu side="start" content-id="main-content">
-      <ion-header>
-        <ion-toolbar translucent>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <form action="general.html" id="form">
-            <ion-item onclick="submitForm()">
-              <ion-icon name="information-circle-sharp" slot="start"></ion-icon>
-              <ion-label>General</ion-label>
-            </ion-item>
-          </form>
-          <script>
-            function submitForm(){
-                var form = document.getElementById("form");
-                form.submit();
-            }
-            </script>
-            <form action="sport.html" id="form1">
-              <ion-item onclick="submitForm1()">
-                <ion-icon name="barbell-sharp" slot="start"></ion-icon>
-                <ion-label>Sport</ion-label>
-              </ion-item>
-            </form>
-          <script>
-            function submitForm1(){
-                var form = document.getElementById("form1");
-                form.submit();
-            }
-            </script>
-            <form action="tech.html" id="form2">
-              <ion-item onclick="submitForm2()">
-                <ion-icon name="code-working-sharp" slot="start"></ion-icon>
-                <ion-label>Tech</ion-label>
-              </ion-item>
-            </form>
-          <script>
-            function submitForm2(){
-                var form = document.getElementById("form2");
-                form.submit();
-            }
-            </script>   
-            <form action="food.html" id="form3">
-              <ion-item onclick="submitForm3()">
-                <ion-icon name="fast-food-sharp" slot="start"></ion-icon>
-                <ion-label>Food</ion-label>
-              </ion-item>
-            </form>
-          <script>
-            function submitForm3(){
-                var form = document.getElementById("form3");
-                form.submit();
-            }
-            </script>                           
-            <form action="events.html" id="form4">
-              <ion-item onclick="submitForm4()">
-                <ion-icon name="calendar-number-sharp" slot="start"></ion-icon>
-                <ion-label>Events</ion-label>
-              </ion-item>
-            </form>
-          <script>
-            function submitForm4(){
-                var form = document.getElementById("form4");
-                form.submit();
-            }
-            </script>                   
-
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+    
 
     <div class="ion-page" id="main-content">
       <ion-header>
@@ -205,6 +233,94 @@
             </ion-button>
           </ion-buttons>
           <ion-img src="images/title.png" style=" width:80px; margin-left: 20px;" slot="start"></ion-img>
+        </ion-toolbar>
+        <ion-toolbar style="padding: 5px;" id="chips">
+          <div >
+            <div class="pn-ProductNav_Wrapper" >
+              <nav id="pnProductNav" class="pn-ProductNav">
+                  <div id="pnProductNavContents" class="pn-ProductNav_Contents">
+                    <a href="#" class="pn-ProductNav_Link">
+                      <form action="tech.html" id="form2">
+                        <ion-chip color="primary" onclick="submitForm2()">
+                          <ion-icon name="code-working-sharp"></ion-icon>
+                          <ion-label>Tech</ion-label>
+                        </ion-chip>
+                      </form>
+                      <script>
+                        function submitForm2(){
+                            var form = document.getElementById("form2");
+                            form.submit();
+                        }
+                        </script>
+                    </a>
+                      <a href="#" class="pn-ProductNav_Link" aria-selected="true">
+                        <form id="form" action="general.html">
+                          <ion-chip color="primary" onclick="submitForm()">
+                            <ion-icon name="information-circle-sharp"></ion-icon>
+                            <ion-label>General</ion-label>
+                          </ion-chip>
+                        </form>
+                        <script>
+                          function submitForm(){
+                              var form = document.getElementById("form");
+                              form.submit();
+                          }
+                          </script>
+                      </a>
+                      <a href="#" class="pn-ProductNav_Link">
+                        <form id="form1" action="sport.html">
+                          <ion-chip color="primary" onclick="submitForm1()">
+                            <ion-icon name="barbell-sharp"></ion-icon>
+                            <ion-label>Sport</ion-label>
+                          </ion-chip>
+                        </form>
+                        <script>
+                          function submitForm1(){
+                              var form = document.getElementById("form1");
+                              form.submit();
+                          }
+                          </script>
+                      </a>
+                      <a href="#" class="pn-ProductNav_Link">
+                        <form action="food.html" id="form3">
+                          <ion-chip color="primary" onclick="submitForm3()">
+                            <ion-icon name="fast-food-sharp"></ion-icon>
+                            <ion-label>Food</ion-label>
+                          </ion-chip>
+                        </form>
+                        <script>
+                          function submitForm3(){
+                              var form = document.getElementById("form3");
+                              form.submit();
+                          }
+                        </script>
+                      </a>
+                      <a href="#" class="pn-ProductNav_Link">
+                        <form action="events.html" id="form4">
+                          <ion-chip color="primary" onclick="submitForm4()">
+                            <ion-icon name="calendar-number-sharp"></ion-icon>
+                            <ion-label>Events</ion-label>
+                          </ion-chip>
+                        </form>
+                        <script>
+                          function submitForm4(){
+                              var form = document.getElementById("form4");
+                              form.submit();
+                          }
+                        </script>
+                      </a>
+                      
+                  </div>
+                
+              </nav>
+                <button id="pnAdvancerLeft"  class="pn-Advancer pn-Advancer_Left"  type="button">
+                  <svg class="pn-Advancer_Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
+                </button>
+                <button id="pnAdvancerRight"  class="pn-Advancer pn-Advancer_Right" type="button">
+                  <svg class="pn-Advancer_Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
+                </button>
+              </div>
+            </div>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
@@ -682,7 +798,148 @@ function showMovies(movies) {
     })
 }
   </script>
+<script>
+  var SETTINGS = {
+navBarTravelling: false,
+navBarTravelDirection: "",
+navBarTravelDistance: 150
+}
 
+document.documentElement.classList.remove("no-js");
+document.documentElement.classList.add("js");
+
+// Out advancer buttons
+var pnAdvancerLeft = document.getElementById("pnAdvancerLeft");
+var pnAdvancerRight = document.getElementById("pnAdvancerRight");
+
+var pnProductNav = document.getElementById("pnProductNav");
+var pnProductNavContents = document.getElementById("pnProductNavContents");
+
+pnProductNav.setAttribute("data-overflowing", determineOverflow(pnProductNavContents, pnProductNav));
+
+// Handle the scroll of the horizontal container
+var last_known_scroll_position = 0;
+var ticking = false;
+
+function doSomething(scroll_pos) {
+pnProductNav.setAttribute("data-overflowing", determineOverflow(pnProductNavContents, pnProductNav));
+}
+
+pnProductNav.addEventListener("scroll", function() {
+last_known_scroll_position = window.scrollY;
+if (!ticking) {
+window.requestAnimationFrame(function() {
+  doSomething(last_known_scroll_position);
+  ticking = false;
+});
+}
+ticking = true;
+});
+
+
+pnAdvancerLeft.addEventListener("click", function() {
+// If in the middle of a move return
+if (SETTINGS.navBarTravelling === true) {
+return;
+}
+// If we have content overflowing both sides or on the left
+if (determineOverflow(pnProductNavContents, pnProductNav) === "left" || determineOverflow(pnProductNavContents, pnProductNav) === "both") {
+// Find how far this panel has been scrolled
+var availableScrollLeft = pnProductNav.scrollLeft;
+// If the space available is less than two lots of our desired distance, just move the whole amount
+// otherwise, move by the amount in the settings
+if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
+  pnProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
+} else {
+  pnProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
+}
+// We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+pnProductNavContents.classList.remove("pn-ProductNav_Contents-no-transition");
+// Update our settings
+SETTINGS.navBarTravelDirection = "left";
+SETTINGS.navBarTravelling = true;
+}
+// Now update the attribute in the DOM
+pnProductNav.setAttribute("data-overflowing", determineOverflow(pnProductNavContents, pnProductNav));
+});
+
+pnAdvancerRight.addEventListener("click", function() {
+// If in the middle of a move return
+if (SETTINGS.navBarTravelling === true) {
+return;
+}
+// If we have content overflowing both sides or on the right
+if (determineOverflow(pnProductNavContents, pnProductNav) === "right" || determineOverflow(pnProductNavContents, pnProductNav) === "both") {
+// Get the right edge of the container and content
+var navBarRightEdge = pnProductNavContents.getBoundingClientRect().right;
+var navBarScrollerRightEdge = pnProductNav.getBoundingClientRect().right;
+// Now we know how much space we have available to scroll
+var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
+// If the space available is less than two lots of our desired distance, just move the whole amount
+// otherwise, move by the amount in the settings
+if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
+  pnProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
+} else {
+  pnProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
+}
+// We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+pnProductNavContents.classList.remove("pn-ProductNav_Contents-no-transition");
+// Update our settings
+SETTINGS.navBarTravelDirection = "right";
+SETTINGS.navBarTravelling = true;
+}
+// Now update the attribute in the DOM
+pnProductNav.setAttribute("data-overflowing", determineOverflow(pnProductNavContents, pnProductNav));
+});
+
+pnProductNavContents.addEventListener(
+"transitionend",
+function() {
+// get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
+var styleOfTransform = window.getComputedStyle(pnProductNavContents, null);
+var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
+// If there is no transition we want to default to 0 and not null
+var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
+pnProductNavContents.style.transform = "none";
+pnProductNavContents.classList.add("pn-ProductNav_Contents-no-transition");
+// Now lets set the scroll position
+if (SETTINGS.navBarTravelDirection === "left") {
+  pnProductNav.scrollLeft = pnProductNav.scrollLeft - amount;
+} else {
+  pnProductNav.scrollLeft = pnProductNav.scrollLeft + amount;
+}
+SETTINGS.navBarTravelling = false;
+},
+false
+);
+
+// Handle setting the currently active link
+pnProductNavContents.addEventListener("click", function(e) {
+var links = [].slice.call(document.querySelectorAll(".pn-ProductNav_Link"));
+links.forEach(function(item) {
+item.setAttribute("aria-selected", "false");
+})
+e.target.setAttribute("aria-selected", "true");
+})
+
+function determineOverflow(content, container) {
+var containerMetrics = container.getBoundingClientRect();
+var containerMetricsRight = Math.floor(containerMetrics.right);
+var containerMetricsLeft = Math.floor(containerMetrics.left);
+var contentMetrics = content.getBoundingClientRect();
+var contentMetricsRight = Math.floor(contentMetrics.right);
+var contentMetricsLeft = Math.floor(contentMetrics.left);
+if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+return "both";
+} else if (contentMetricsLeft < containerMetricsLeft) {
+return "left";
+} else if (contentMetricsRight > containerMetricsRight) {
+return "right";
+} else {
+return "none";
+}
+}
+</script>
 </body>
 
 </html>
