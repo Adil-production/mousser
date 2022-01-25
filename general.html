@@ -118,6 +118,19 @@ fill: rgb(81, 108, 156);
       top: 50%;
       transform: translate(-50%,-50%);
     }
+    .img{
+      margin: 10px;
+      width: 33px;
+      display: inline-block;
+      
+    }
+    .img2{
+      margin: 10px;
+      width: 33px;
+      transform: scale(1.5);
+      display: inline-block;
+     
+    }
     img{
       border-radius: 10px;
     }
@@ -129,8 +142,19 @@ fill: rgb(81, 108, 156);
       width: 100%;
       padding: 20px;
       color: black;
+      
     }
-    #main,#your-messages{
+    .msg2{
+      border: solid 0.4px gray;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
+      padding: 20px;
+      color: black;
+      
+    }
+    #main,#your-messages,#main3{
       position: absolute;
       left: 0;
       right: 0;
@@ -322,8 +346,91 @@ fill: rgb(81, 108, 156);
                 </div>
               </div>
           </ion-toolbar>
+          <ion-toolbar>
+            <ion-segment value="all">
+              <ion-segment-button value="all" onclick="general()">General</ion-segment-button>
+              <ion-segment-button value="favorites" onclick="quote()">Quotes</ion-segment-button>
+              <script>
+                
+                function general(){
+                  var main = document.getElementById("main")
+                  var main1 = document.getElementById("main3")
+                  var type = document.getElementById("type")
+                  var input = document.getElementById("grpinput")
+                  input.style.display = "none"
+                  main.style.display = "block"
+                  main1.style.display = "none"
+                  type.style.display = "block"
+                }
+                function quote(){
+                  var main = document.getElementById("main")
+                  var main1 = document.getElementById("main3")
+                  var type = document.getElementById("type")
+                  var input = document.getElementById("grpinput")
+                  input.style.display = "block"
+                  type.style.display = "none"
+                  main1.style.display = "block"
+                  main.style.display = "none"
+                }
+                fetch("https://type.fit/api/quotes")
+                  .then(function(response) {
+                    return response.json();
+                  })
+                  .then(function(data) {
+                    console.log(data);
+
+
+                document.getElementById('main3').innerHTML = ''
+
+                  data.forEach((movie) => {
+                      const { text,author } = movie
+                      // a : author
+                      // q : quote
+                      // c : character count
+                      // h : pre-formatted HTML quote
+                      const movieEl = document.createElement('div')
+                      movieEl.classList.add('movie')
+
+                      movieEl.innerHTML = `
+                      <div class="msg2">
+                        <strong style="color : black">${author}</strong><br>${text}
+                      </div>
+                      `
+                      document.getElementById('main3').appendChild(movieEl)
+                  })
+                });
+              
+              function showData(movies) {
+                document.getElementById('main3').innerHTML = ''
+
+                  movies.forEach((movie) => {
+                      const { text,author } = movie
+                      // a : author
+                      // q : quote
+                      // c : character count
+                      // h : pre-formatted HTML quote
+                      const movieEl = document.createElement('div')
+                      movieEl.classList.add('movie')
+
+                      movieEl.innerHTML = `
+                      <div class="msg">
+                        <strong style="color : black">${author}</strong><br>${text}
+                      </div>
+                      `
+                      document.getElementById('main3').appendChild(movieEl)
+                  })
+              }
+              
+              </script>
+            </ion-segment>
+          </ion-toolbar>
+          <ion-toolbar id="grpinput" style="display: none;">
+            <ion-item><ion-searchbar id="input" slot=></ion-searchbar><ion-button slot="end" onclick="myFunction()" style="width:50px; height:45px; transform:translateY(-5%);"><ion-icon name="search-outline"></ion-icon></ion-button></ion-item>
+            
+          </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
+          <div id="main3" style="display: none;"></div>
           <div id="main2">
             <h2 style="margin-bottom: 20px;" id="type">
               <strong>General</strong>
@@ -396,14 +503,14 @@ fill: rgb(81, 108, 156);
       <ion-header translucent>
         <ion-toolbar >
           <ion-title>New message</ion-title>
+          <ion-buttons slot="end" id="btn">
+            <ion-button >Send</ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
 
       <ion-content  class="ion-padding">
-        <div align="right">
-          <ion-button id="btn" ><ion-icon name="send-sharp"></ion-icon></ion-button>
-         </div>
-        <ion-item >
+        <ion-item>
           <ion-label position="floating">Message</ion-label>
           <ion-input id="msg"></ion-input>
         </ion-item>
@@ -423,6 +530,14 @@ fill: rgb(81, 108, 156);
           </ion-chip></a>
          </div>
          <br>
+         <h2><strong>Language of News :</strong></h2>
+         <div style="margin: 10px;" align="center">
+          <div class="img2"onclick="en()" id="en"><ion-img  src="https://cdn-icons-png.flaticon.com/128/555/555417.png" ></ion-img></div>
+          <div class="img" onclick="ar()" id="ar"><ion-img  src="https://cdn-icons.flaticon.com/png/128/5111/premium/5111862.png?token=exp=1643137189~hmac=ae356a90640a7c882169ec01acc484fe" ></ion-img></div>
+          <div class="img" onclick="hi()" id="hi"><ion-img  src="https://cdn-icons-png.flaticon.com/128/206/206606.png" ></ion-img></div>
+          <div class="img" onclick="es()" id="es"><ion-img  src="https://cdn-icons-png.flaticon.com/128/330/330557.png" ></ion-img></div>
+          <div class="img" onclick="ru()" id="ru"><ion-img  src="https://cdn-icons-png.flaticon.com/128/330/330437.png" ></ion-img></div>
+         </div>
          <h2><strong>Top news :</strong></h2>
          <br>
          <div id="news"></div>
@@ -585,15 +700,35 @@ document.getElementById("btn").addEventListener("click" , async function(){
    var img = document.getElementById("img").value;
    var message = localStorage.getItem("messagegeneral");
    if(message){
-      localStorage.setItem("messagegeneral" , localStorage.getItem("messagegeneral") + `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+      localStorage.setItem("messagegeneral" , localStorage.getItem("messagegeneral") + `<div class="msg">
+          <strong style="color : black">${last} ${UserName}</strong>
+          <br>
+          ${msg}
+          <br>
+          <img data-src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />
+        </div>`)
       document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
     } else {
-       localStorage.setItem("messagegeneral" , `<div class="msg"><strong style="color : black">${last} ${UserName}</strong><br>${msg}<br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" /></div>`)
+       localStorage.setItem("messagegeneral" , `
+        <div class="msg">
+          <strong style="color : black">${last} ${UserName}</strong>
+          <br>
+          ${msg}
+          <br>
+          <img data-src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />
+        </div>
+          `)
        document.getElementById("your-messages").innerHTML = localStorage.getItem("messagegeneral")
     }
    try {
     const docRef = await addDoc(collection(db, "general"), {
-    message: `<strong style="color : black">${last} ${UserName}</strong><br> ${msg}  <br>  <img src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />`
+    message: `
+      <strong style="color : black">${last} ${UserName}</strong>
+      <br>
+      ${msg}
+      <br> 
+      <img data-src="${img}" style="max-width:100%; width:90%; height:auto; display: block;margin-left: auto;margin-right: auto;" />
+     `
   });
 
 } catch (e) {
@@ -746,9 +881,76 @@ const pageEl = document.querySelector('.ion-page');
           });
         }
       }
-      const API_URL = 'https://newsdata.io/api/1/news?apikey=pub_12256fd4bb513de2c35c5af1589f8aa3938a&language=en'
-const main = document.getElementById('news')
 
+var API_URL = 'https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=en'
+var main = document.getElementById('news')
+
+
+// ------------------------------------------------------------
+
+
+
+  function en(){
+    document.getElementById("en").classList.remove("img")
+    document.getElementById("en").classList.add("img2")
+    document.getElementById("ar").classList.remove("img2")
+    document.getElementById("ar").classList.add("img")
+    document.getElementById("hi").classList.remove("img2")
+    document.getElementById("hi").classList.add("img")
+    document.getElementById("es").classList.remove("img2")
+    document.getElementById("es").classList.add("img")
+    document.getElementById("ru").classList.remove("img2")
+    document.getElementById("ru").classList.add("img")
+    getMovies("https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=en")
+  } function ar(){
+    document.getElementById("ar").classList.remove("img")
+    document.getElementById("ar").classList.add("img2")
+    document.getElementById("en").classList.remove("img2")
+    document.getElementById("en").classList.add("img")
+    document.getElementById("hi").classList.remove("img2")
+    document.getElementById("hi").classList.add("img")
+    document.getElementById("es").classList.remove("img2")
+    document.getElementById("es").classList.add("img")
+    document.getElementById("ru").classList.remove("img2")
+    document.getElementById("ru").classList.add("img")
+    getMovies("https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=ar")
+  } function es(){
+    document.getElementById("es").classList.remove("img")
+    document.getElementById("es").classList.add("img2")
+    document.getElementById("en").classList.remove("img2")
+    document.getElementById("en").classList.add("img")
+    document.getElementById("hi").classList.remove("img2")
+    document.getElementById("hi").classList.add("img")
+    document.getElementById("ar").classList.remove("img2")
+    document.getElementById("ar").classList.add("img")
+    document.getElementById("ru").classList.remove("img2")
+    document.getElementById("ru").classList.add("img")
+    getMovies("https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=es")
+  } function hi(){
+    document.getElementById("hi").classList.remove("img")
+    document.getElementById("hi").classList.add("img2")
+    document.getElementById("en").classList.remove("img2")
+    document.getElementById("en").classList.add("img")
+    document.getElementById("es").classList.remove("img2")
+    document.getElementById("es").classList.add("img")
+    document.getElementById("ar").classList.remove("img2")
+    document.getElementById("ar").classList.add("img")
+    document.getElementById("ru").classList.remove("img2")
+    document.getElementById("ru").classList.add("img")
+    getMovies("https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=hi")
+  } function ru(){
+    document.getElementById("ru").classList.remove("img")
+    document.getElementById("ru").classList.add("img2")
+    document.getElementById("en").classList.remove("img2")
+    document.getElementById("en").classList.add("img")
+    document.getElementById("es").classList.remove("img2")
+    document.getElementById("es").classList.add("img")
+    document.getElementById("ar").classList.remove("img2")
+    document.getElementById("ar").classList.add("img")
+    document.getElementById("hi").classList.remove("img2")
+    document.getElementById("hi").classList.add("img")
+    getMovies("https://gnews.io/api/v4/top-headlines?token=d1b07a439d07bb4561f441e9bea22a39&lang=ru")
+  }
 
 // Get initial movies
 getMovies(API_URL)
@@ -756,8 +958,7 @@ getMovies(API_URL)
 async function getMovies(url) {
     const res = await fetch(url)
     const data = await res.json()
-
-    showMovies(data.results)
+    showMovies(data.articles)
     console.log(data)
 }
 
@@ -765,22 +966,22 @@ function showMovies(movies) {
     main.innerHTML = ''
 
     movies.forEach((movie) => {
-        const { title, image_url , pubDate , source_id} = movie
+        const { title, image , publishedAt  } = movie
 
         const movieEl = document.createElement('div')
         movieEl.classList.add('movie')
 
         movieEl.innerHTML = `
         <ion-card>
-        <img src="${image_url}" width="100%"/>
+        <img src="${image}" width="100%"/>
         <ion-card-header>
           <ion-card-title>${title}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          Source : ${source_id}
+          
         </ion-card-content>
        
-            <ion-label style="margin : 10px; padding:10px;">${pubDate}</ion-label>
+            <ion-label style="margin : 10px; padding:10px;">${publishedAt}</ion-label>
             <br>
             <br>
 
@@ -790,6 +991,50 @@ function showMovies(movies) {
         `
         main.appendChild(movieEl)
     })
+}
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages = document.querySelectorAll("img.lazy");    
+  var lazyloadThrottleTimeout;
+  
+  function lazyload () {
+    if(lazyloadThrottleTimeout) {
+      clearTimeout(lazyloadThrottleTimeout);
+    }    
+    
+    lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+    }, 20);
+  }
+  
+  document.addEventListener("scroll", lazyload);
+  window.addEventListener("resize", lazyload);
+  window.addEventListener("orientationChange", lazyload);
+});
+function myFunction() {
+  var input = document.getElementById("input");
+  var filter = input.value.toLowerCase();
+  var nodes = document.getElementsByClassName('msg2');
+
+  for (i = 0; i < nodes.length; i++) {
+    if (nodes[i].innerText.toLowerCase().includes(filter)) {
+      nodes[i].style.display = "inline-block";
+    } else {
+      nodes[i].style.display = "none";
+    }
+  }
 }
 </script>
 <script>
