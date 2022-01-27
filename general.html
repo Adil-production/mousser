@@ -353,14 +353,7 @@ fill: rgb(81, 108, 156);
               <script>
                 
                 function general(){
-                  var main = document.getElementById("main")
-                  var main1 = document.getElementById("main3")
-                  var type = document.getElementById("type")
-                  var input = document.getElementById("grpinput")
-                  input.style.display = "none"
-                  main.style.display = "block"
-                  main1.style.display = "none"
-                  type.style.display = "block"
+                  window.location.reload()
                 }
                 function quote(){
                   var main = document.getElementById("main")
@@ -371,6 +364,7 @@ fill: rgb(81, 108, 156);
                   type.style.display = "none"
                   main1.style.display = "block"
                   main.style.display = "none"
+                  document.getElementById("chips").style.display = "none"
                 }
                 fetch("https://type.fit/api/quotes")
                   .then(function(response) {
@@ -425,8 +419,7 @@ fill: rgb(81, 108, 156);
             </ion-segment>
           </ion-toolbar>
           <ion-toolbar id="grpinput" style="display: none;">
-            <ion-item><ion-searchbar id="input" slot=></ion-searchbar><ion-button slot="end" onclick="myFunction()" style="width:50px; height:45px; transform:translateY(-5%);"><ion-icon name="search-outline"></ion-icon></ion-button></ion-item>
-            
+            <ion-searchbar id="input" oninput="myFunction()"></ion-searchbar>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
@@ -533,7 +526,7 @@ fill: rgb(81, 108, 156);
          <h2><strong>Language of News :</strong></h2>
          <div style="margin: 10px;" align="center">
           <div class="img2"onclick="en()" id="en"><ion-img  src="https://cdn-icons-png.flaticon.com/128/555/555417.png" ></ion-img></div>
-          <div class="img" onclick="ar()" id="ar"><ion-img  src="https://cdn-icons.flaticon.com/png/128/5111/premium/5111862.png?token=exp=1643137189~hmac=ae356a90640a7c882169ec01acc484fe" ></ion-img></div>
+          <div class="img" onclick="ar()" id="ar"><ion-img  src="https://cdn-icons-png.flaticon.com/128/206/206719.png" ></ion-img></div>
           <div class="img" onclick="hi()" id="hi"><ion-img  src="https://cdn-icons-png.flaticon.com/128/206/206606.png" ></ion-img></div>
           <div class="img" onclick="es()" id="es"><ion-img  src="https://cdn-icons-png.flaticon.com/128/330/330557.png" ></ion-img></div>
           <div class="img" onclick="ru()" id="ru"><ion-img  src="https://cdn-icons-png.flaticon.com/128/330/330437.png" ></ion-img></div>
