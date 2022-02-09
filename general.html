@@ -426,10 +426,7 @@ fill: rgb(81, 108, 156);
           <div id="main3" style="display: none;"></div>
           <div id="main2">
             <h2 style="margin-bottom: 20px;" id="type">
-              <strong>General</strong>
               <div id="list" align="center">
-                <br>
-              <br>
                 <form action="general.html" id="form5">
                   
                   <div class="list"  onclick="submitForm5()"><strong><ion-icon name="information-circle-sharp" style="transform: translateY(12%)translateX(-50%); "></ion-icon>General</strong></div>
@@ -478,7 +475,6 @@ fill: rgb(81, 108, 156);
                 </form>
               </div>
             </h2>
-            <br>
             <div id="main"></div>
             <div id="notmain" style="display: none;"class="center">
               <ion-icon name="hourglass-sharp" style="font-size: 100px;"></ion-icon>
@@ -727,7 +723,7 @@ document.getElementById("btn").addEventListener("click" , async function(){
 } catch (e) {
   console.error("Error adding document: ", e);
 }
-const querySnapshot = await getDocs(collection(db, "general"));
+  const querySnapshot = await getDocs(collection(db, "general"));
   querySnapshot.forEach((doc) => {
     var name = localStorage.getItem("name");
     console.log(doc.data().message);
@@ -1174,5 +1170,4 @@ return "none";
 </script>
 
 </body>
-
 </html>
